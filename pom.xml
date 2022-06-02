@@ -36,22 +36,13 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-<<<<<<< HEAD
+
 <!--		<dependency>-->
 <!--			<groupId>mysql</groupId>-->
 <!--			<artifactId>mysql-connector-java</artifactId>-->
 <!--			<scope>runtime</scope>-->
 <!--		</dependency>-->
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-=======
-<!-- 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
->>>>>>> 8d919bb00efbc0176bc75f9cbd36725a261da957
-			<scope>runtime</scope>
-		</dependency> -->
+
 		<dependency>
             		<groupId>org.postgresql</groupId>
             		<artifactId>postgresql</artifactId>
