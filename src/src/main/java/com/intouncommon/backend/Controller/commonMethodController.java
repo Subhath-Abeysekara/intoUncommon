@@ -9,7 +9,7 @@ import com.intouncommon.backend.Entity.response;
 
 @RestController
 @RequestMapping("/intouncommon")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class commonMethodController {
 
     @Autowired

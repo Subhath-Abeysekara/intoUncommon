@@ -14,7 +14,7 @@
 	<name>backend</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -36,6 +36,7 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+<<<<<<< HEAD
 <!--		<dependency>-->
 <!--			<groupId>mysql</groupId>-->
 <!--			<artifactId>mysql-connector-java</artifactId>-->
@@ -44,8 +45,19 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+=======
+<!-- 		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+>>>>>>> 8d919bb00efbc0176bc75f9cbd36725a261da957
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> -->
+		<dependency>
+            		<groupId>org.postgresql</groupId>
+            		<artifactId>postgresql</artifactId>
+            		<scope>runtime</scope>
+        	</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
