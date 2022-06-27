@@ -52,7 +52,7 @@ public class commonMethodController {
     }
 
     @GetMapping("/test2")
-    private String test2(@Requestparam String name ,String age) throws Exception {
+    private String test2(@Requestparam String name ,String age){
 
         return name + age;
     }
