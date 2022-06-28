@@ -51,7 +51,7 @@ public class commonMethodController {
 
     @GetMapping("/getproducts")
     private List<productions> getAllProducts(){
-        return commonMethodService.getAllProductions();
+        return commonMethodService.getProductions();
     }
 
     @PostMapping(value="/product/add" ,consumes = "application/json", produces = "application/json")
