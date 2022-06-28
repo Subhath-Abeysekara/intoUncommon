@@ -50,6 +50,12 @@ public class commonMethodController {
         }
         return "Wrong token";
     }
+
+    @GetMapping("/test2")
+    private String test(@Requestparam String name ,String age) throws Exception {
+
+        return name + age;
+    }
     /** productions **/
 
     @GetMapping("/getproductsandcontact")
