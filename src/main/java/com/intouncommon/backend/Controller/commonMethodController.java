@@ -40,18 +40,27 @@ public class commonMethodController {
         return adminService.changeAdmin(admin.getOldUsername(),admin.getUsername(),admin.getOldPassword(),admin.getPassword());
     }
     @GetMapping("/test")
-    private String test(@RequestParam String name,@RequestParam String age){
+    private String test(@RequestHeader String token) throws Exception {
 
 //        response response = new response();
 //        response.setResponse("test pass");
 //        return response;
-        return name+age;
+        if(adminService.checkTokenValidity(token)){
+            return "successful";
+        }
+        return "Wrong token";
     }
     /** productions **/
 
+    @GetMapping("/getproductsandcontact")
+    private productResponse getAllProductswithContact(@RequestParam long id){
+        return commonMethodService.getAllProductions(id);
+    }
+
     @GetMapping("/getproducts")
-    private List<productions> getAllProducts(){
-        return commonMethodService.getAllProductions();
+    private List<productions> getAllProducts()
+    {
+        return commonMethodService.getProductions();
     }
 
     @PostMapping(value="/product/add" ,consumes = "application/json", produces = "application/json")
@@ -63,6 +72,12 @@ public class commonMethodController {
     @PutMapping("/product/update")
     private String updateProduct(@RequestParam Long id, @RequestBody productions production){
         return commonMethodService.updateProduction(id,production);
+    }
+
+    @PostMapping("/product/url/add")
+    private String addProductUrl(@RequestBody productImageDTO productImageDTO){
+        commonMethodService.addImageUrl(productImageDTO);
+        return "added";
     }
 
     @DeleteMapping("/product/delete")

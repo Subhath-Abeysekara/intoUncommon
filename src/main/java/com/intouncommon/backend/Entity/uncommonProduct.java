@@ -7,7 +7,11 @@ import javax.persistence.*;
 public class uncommonProduct extends productions {
 
    private String specialUsage;
-   private String responsibility;
+   private String madeIn;
+   private String designBy;
+   private String inventBy;
+   private String qualityOf;
+
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "statecodes",referencedColumnName = "stateId")
@@ -41,11 +45,35 @@ public class uncommonProduct extends productions {
         this.specialUsage = specialUsage;
     }
 
-    public String getResponsibility() {
-        return responsibility;
+    public String getMadeIn() {
+        return madeIn;
     }
 
-    public void setResponsibility(String responsibility) {
-        this.responsibility = responsibility;
+    public void setMadeIn(String madeIn) {
+        this.madeIn = madeIn;
+    }
+
+    public String getDesignBy() {
+        return designBy;
+    }
+
+    public void setDesignBy(String designBy) {
+        this.designBy = designBy;
+    }
+
+    public String getInventBy() {
+        return inventBy;
+    }
+
+    public void setInventBy(String inventBy) {
+        this.inventBy = inventBy;
+    }
+
+    public String getQualityOf() {
+        return qualityOf;
+    }
+
+    public void setQualityOf(String qualityOf) {
+        this.qualityOf = qualityOf;
     }
 }

@@ -11,6 +11,10 @@ public class statecodes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long stateId;
     private String state_type;
+    private String repayColor = "red";
+    private String changeColor = "red";
+    private String warrantyColor = "red";
+    private String discountColor="red";
 
 
     public statecodes() {

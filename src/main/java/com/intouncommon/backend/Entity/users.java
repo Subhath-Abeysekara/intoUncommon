@@ -11,10 +11,10 @@ public class users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-    private String name;
-    private String email;
-    private String password;
-    private String contact;
+    private String name="prabhath";
+    private String email="evouncommon@gmaail.com";
+    private String password="12345678";
+    private String contact="+94765233983";
 
     public users() {
     }

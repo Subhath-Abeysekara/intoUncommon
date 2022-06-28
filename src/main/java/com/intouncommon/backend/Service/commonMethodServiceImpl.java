@@ -2,7 +2,10 @@ package com.intouncommon.backend.Service;
 
 
 import com.intouncommon.backend.Entity.*;
+import org.hibernate.ResourceClosedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import com.intouncommon.backend.Repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,9 @@ public class commonMethodServiceImpl implements commonMethodService{
 
     @Autowired
     private com.intouncommon.backend.Repository.userRepository userRepository;
+
+    @Autowired
+    private productionImageRepository productionImageRepository;
 
     @Override
     public categories addCategory(categories category) {
@@ -115,7 +121,15 @@ public class commonMethodServiceImpl implements commonMethodService{
     }
 
     @Override
-    public List<productions> getAllProductions() {
+    public productResponse getAllProductions(Long id) {
+        productResponse productResponse = new productResponse();
+        productResponse.setProductions(productionRepository.findAll());
+        productResponse.setContact(userRepository.getContact(id));
+        return productResponse;
+    }
+
+    @Override
+    public List<productions> getProductions() {
         return productionRepository.findAll();
     }
 
@@ -202,5 +216,16 @@ public class commonMethodServiceImpl implements commonMethodService{
     @Override
     public List<users> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public productImages addImageUrl(productImageDTO productImageDTO) {
+        productImages productImages = productImageDTO.getProductImages();
+
+
+        productions existingProduction = productionRepository.findById(productImageDTO.getProductId()).orElseThrow(() ->
+                new ResourceClosedException( "notfound"));
+        productImages.setProductions(existingProduction);
+        return productionImageRepository.save(productImages);
     }
 }
