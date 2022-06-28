@@ -17,7 +17,8 @@ public interface commonMethodService {
     productions addProduction(productions production);
     String updateProduction(Long id, productions production);
     String deleteProduction(Long id);
-    List<productions> getAllProductions();
+    productResponse getAllProductions(Long id);
+    List<productions> getProductions();
     statecodes addStateCode(statecodes statecode);
     String updateStateCode(Long id, statecodes statecode);
     String deleteStateCode(Long id);
@@ -29,4 +30,5 @@ public interface commonMethodService {
     String updateUser(Long id, users user);
     String deleteUser(Long id);
     List<users> getAllUsers();
+    productImages addImageUrl (productImageDTO productImageDTO);
 }

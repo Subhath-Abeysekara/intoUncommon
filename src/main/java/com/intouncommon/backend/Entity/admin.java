@@ -10,8 +10,8 @@ public class admin {
 
     @Id
     private int id;
-    private String username;
-    private String password;
+    private String username="subhath";
+    private String password="12345678";
 
     public admin() {
     }
