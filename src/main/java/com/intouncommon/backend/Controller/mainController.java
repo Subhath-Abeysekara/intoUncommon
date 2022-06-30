@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/intouncommon")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://www.intouncommon.com")
 public class mainController {
 
     @Autowired
