@@ -47,6 +47,18 @@ public class commonMethodController {
 //        return response;
         return name+age;
     }
+    
+    @GetMapping("/getvalidity")
+    private String validityCheck(@RequestHeader String header) throws Exception {
+
+//        response response = new response();
+//        response.setResponse("test pass");
+//        return response;
+        if(adminService.checkTokenValidity(header)){
+            return "successful";
+        }
+        return "Wrong token";
+    }
     /** productions **/
 
     @GetMapping("/getproducts")
