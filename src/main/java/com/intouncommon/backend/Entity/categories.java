@@ -4,6 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.ToString;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class categories {
@@ -14,10 +19,10 @@ public class categories {
     private boolean common;
     private String material;
 
-//    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JsonManagedReference("category-product")
-//    @ToString.Exclude
-//    private List<Product> products;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("category-product")
+    @ToString.Exclude
+    private List<productions> productsions;
 //
     public categories() {
     }
