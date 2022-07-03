@@ -31,8 +31,10 @@ public class productions {
 
 
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "category",referencedColumnName = "categoryId")
+   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "category", foreignKey = @ForeignKey(name = "product_category_fk1"))
+    @JsonBackReference(value = "category-product")
+    @ToString.Exclude
     private categories category;
 
     @OneToMany(mappedBy = "productions", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
