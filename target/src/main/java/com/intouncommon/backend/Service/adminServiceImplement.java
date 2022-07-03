@@ -2,15 +2,18 @@ package com.intouncommon.backend.Service;
 
 import com.intouncommon.backend.Entity.admin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
+
 public class adminServiceImplement implements adminService {
 
-    @Autowired
+
+
     private com.intouncommon.backend.Repository.adminRepository adminRepository;
 
     public String getPw(String username) {
@@ -20,7 +23,6 @@ public class adminServiceImplement implements adminService {
         }
         return admin.getPassword();
     }
-
     private String makeHourCount(){
         Date date = new Date();
         SimpleDateFormat sdt5 = new SimpleDateFormat("hh");

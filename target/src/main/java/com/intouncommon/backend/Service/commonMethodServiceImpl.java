@@ -6,6 +6,7 @@ import org.hibernate.ResourceClosedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import com.intouncommon.backend.Repository.*;
+import com.intouncommon.backend.Repository.categoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,25 +15,25 @@ import java.util.Optional;
 @Service
 public class commonMethodServiceImpl implements commonMethodService{
 
-    @Autowired
-    private com.intouncommon.backend.Repository.categoryRepository categoryRepository;
 
-    @Autowired
+    private categoryRepository categoryRepository;
+
+
     private com.intouncommon.backend.Repository.producerRepository producerRepository;
 
-    @Autowired
+
     private com.intouncommon.backend.Repository.productionRepository productionRepository;
 
-    @Autowired
+
     private com.intouncommon.backend.Repository.statecodesRepository statecodesRepository;
 
-    @Autowired
+
     private com.intouncommon.backend.Repository.uncommonRepository uncommonRepository;
 
-    @Autowired
+
     private com.intouncommon.backend.Repository.userRepository userRepository;
 
-    @Autowired
+
     private productionImageRepository productionImageRepository;
 
     @Override

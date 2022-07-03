@@ -10,22 +10,22 @@ import java.util.Optional;
 @Service
 public class mainServiceImplementation implements mainService {
 
-    @Autowired
+
     private com.intouncommon.backend.Repository.categoryRepository categoryRepository;
 
-    @Autowired
+
     private com.intouncommon.backend.Repository.producerRepository producerRepository;
 
-    @Autowired
+
     private com.intouncommon.backend.Repository.productionRepository productionRepository;
 
-    @Autowired
+
     private com.intouncommon.backend.Repository.statecodesRepository statecodesRepository;
 
-    @Autowired
+   // @Autowired
     private com.intouncommon.backend.Repository.uncommonRepository uncommonRepository;
 
-    @Autowired
+   // @Autowired
     private com.intouncommon.backend.Repository.userRepository userRepository;
 
     @Override
