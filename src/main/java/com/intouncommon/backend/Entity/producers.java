@@ -22,10 +22,10 @@ public class producers {
     @ToString.Exclude
     private List<producerCategories> producerCategories;
 
-//    @OneToMany(mappedBy = "producers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JsonManagedReference("producer-product")
-//    @ToString.Exclude
-//    private List<Product> products;
+    @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("producer-product")
+    @ToString.Exclude
+    private List<productions> productions;
 
 
 

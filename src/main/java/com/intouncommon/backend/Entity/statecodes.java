@@ -1,9 +1,10 @@
 package com.intouncommon.backend.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.ToString;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class statecodes {
@@ -15,6 +16,12 @@ public class statecodes {
     private String changeColor = "red";
     private String warrantyColor = "red";
     private String discountColor="red";
+
+
+    @OneToMany(mappedBy = "statecode", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("statecode-product")
+    @ToString.Exclude
+    private List<productions> productions;
 
 
     public statecodes() {

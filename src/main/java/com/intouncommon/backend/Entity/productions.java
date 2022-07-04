@@ -26,8 +26,10 @@ public class productions {
     private int amount=0;
 
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "producer",referencedColumnName = "producerId")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "producer", foreignKey = @ForeignKey(name = "product_producer_fk1"))
+    @JsonBackReference(value = "producer-product")
+    @ToString.Exclude
     private producers producer;
 
 

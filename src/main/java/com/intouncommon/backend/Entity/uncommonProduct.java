@@ -1,5 +1,8 @@
 package com.intouncommon.backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,8 +16,10 @@ public class uncommonProduct extends productions {
    private String qualityOf;
 
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "statecodes",referencedColumnName = "stateId")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "statecode", foreignKey = @ForeignKey(name = "product_statecode_fk1"))
+    @JsonBackReference(value = "statecode-product")
+    @ToString.Exclude
     private  statecodes statecodes;
 
     public uncommonProduct() {
