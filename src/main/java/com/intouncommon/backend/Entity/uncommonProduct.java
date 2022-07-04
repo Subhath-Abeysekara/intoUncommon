@@ -17,7 +17,7 @@ public class uncommonProduct extends productions {
 
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "statecode", foreignKey = @ForeignKey(name = "product_statecode_fk1"))
+    @JoinColumn(name = "statecodes", foreignKey = @ForeignKey(name = "product_statecode_fk1"))
     @JsonBackReference(value = "statecode-product")
     @ToString.Exclude
     private  statecodes statecodes;

@@ -18,10 +18,10 @@ public class statecodes {
     private String discountColor="red";
 
 
-    @OneToMany(mappedBy = "statecode", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "statecodes", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference("statecode-product")
     @ToString.Exclude
-    private List<productions> productions;
+    private List<uncommonProduct> uncommonProducts;
 
 
     public statecodes() {
