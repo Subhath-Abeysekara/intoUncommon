@@ -23,6 +23,14 @@ public class categories {
     public categories() {
     }
 
+    public List<productions> getProductsions() {
+        return productsions;
+    }
+
+    public void setProductsions(List<productions> productsions) {
+        this.productsions = productsions;
+    }
+
     public Long getCategoryId() {
         return categoryId;
     }

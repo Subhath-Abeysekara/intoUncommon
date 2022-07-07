@@ -67,7 +67,7 @@ public class commonMethodController {
     }
 
     @PostMapping(value="/product/add" ,consumes = "application/json", produces = "application/json")
-    private String addProduct(@RequestBody productions production){
+    private String addProduct(@RequestBody productionDto production){
         commonMethodService.addProduction(production);
         return "Successfully Added";
     }
@@ -152,7 +152,7 @@ public class commonMethodController {
     /** Uncommon **/
 
     @PostMapping("/uncommon/add")
-    private String addUncommon(@RequestBody uncommonProduct uncommonProduct){
+    private String addUncommon(@RequestBody uncommonProductDto uncommonProduct){
         commonMethodService.addUncommonProduction(uncommonProduct);
         return "Successfully Added";
     }

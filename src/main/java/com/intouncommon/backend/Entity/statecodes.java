@@ -27,6 +27,46 @@ public class statecodes {
     public statecodes() {
     }
 
+    public String getRepayColor() {
+        return repayColor;
+    }
+
+    public void setRepayColor(String repayColor) {
+        this.repayColor = repayColor;
+    }
+
+    public String getChangeColor() {
+        return changeColor;
+    }
+
+    public void setChangeColor(String changeColor) {
+        this.changeColor = changeColor;
+    }
+
+    public String getWarrantyColor() {
+        return warrantyColor;
+    }
+
+    public void setWarrantyColor(String warrantyColor) {
+        this.warrantyColor = warrantyColor;
+    }
+
+    public String getDiscountColor() {
+        return discountColor;
+    }
+
+    public void setDiscountColor(String discountColor) {
+        this.discountColor = discountColor;
+    }
+
+    public List<uncommonProduct> getUncommonProducts() {
+        return uncommonProducts;
+    }
+
+    public void setUncommonProducts(List<uncommonProduct> uncommonProducts) {
+        this.uncommonProducts = uncommonProducts;
+    }
+
     public Long getStateId() {
         return stateId;
     }

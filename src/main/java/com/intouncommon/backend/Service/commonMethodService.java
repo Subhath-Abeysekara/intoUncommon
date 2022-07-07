@@ -14,7 +14,7 @@ public interface commonMethodService {
     String updateProducer(Long id, producers producer);
     String deleteProducer(Long id);
     List<producers> getAllProducers();
-    productions addProduction(productions production);
+    productions addProduction(productionDto production);
     String updateProduction(Long id, productions production);
     String deleteProduction(Long id);
     productResponse getAllProductions(Long id);
@@ -23,7 +23,7 @@ public interface commonMethodService {
     String updateStateCode(Long id, statecodes statecode);
     String deleteStateCode(Long id);
     List<statecodes> getAllStates();
-    uncommonProduct addUncommonProduction(uncommonProduct uncommonProduct);
+    uncommonProduct addUncommonProduction(uncommonProductDto uncommonProduct);
     String updateUncommonProduction(Long id, uncommonProduct uncommonProduct);
     String deleteUncommonProduction(Long id);
     users addUser(users user);

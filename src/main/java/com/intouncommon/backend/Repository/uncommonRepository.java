@@ -1,5 +1,6 @@
 package com.intouncommon.backend.Repository;
 
+import com.intouncommon.backend.Entity.statecodes;
 import com.intouncommon.backend.Entity.uncommonProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,4 +16,8 @@ public interface uncommonRepository extends JpaRepository<uncommonProduct, Long>
     @Modifying
     @Query("update uncommonProduct P set P.statecodes=:state where P.statecodes=:oldState")
     void setStateCode(Long state, Long oldState);
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM uncommonProduct v WHERE v.id = :id")
+    void deleteByUncommonId(Long id);
 }

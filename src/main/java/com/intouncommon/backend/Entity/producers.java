@@ -32,6 +32,14 @@ public class producers {
     public producers() {
     }
 
+    public List<com.intouncommon.backend.Entity.productions> getProductions() {
+        return productions;
+    }
+
+    public void setProductions(List<com.intouncommon.backend.Entity.productions> productions) {
+        this.productions = productions;
+    }
+
     public Long getProducerId() {
         return producerId;
     }

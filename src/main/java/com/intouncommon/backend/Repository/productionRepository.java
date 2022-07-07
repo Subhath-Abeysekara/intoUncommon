@@ -27,4 +27,8 @@ public interface productionRepository extends JpaRepository<productions, Long> {
         @Modifying
         @Query("update productions P set P.amount=:amount where P.id=:id")
         void setImageAmount(int amount, Long id);
+        @Modifying
+        @Transactional
+        @Query(value = "DELETE FROM productions v WHERE v.id = :id")
+        void deleteByProductId(Long id);
 }

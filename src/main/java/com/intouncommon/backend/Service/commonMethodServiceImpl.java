@@ -2,6 +2,7 @@ package com.intouncommon.backend.Service;
 
 
 import com.intouncommon.backend.Entity.*;
+import com.intouncommon.backend.Repository.exception.ResourceNotFoundException;
 import org.hibernate.ResourceClosedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
@@ -34,6 +35,8 @@ public class commonMethodServiceImpl implements commonMethodService{
 
     @Autowired
     private productionImageRepository productionImageRepository;
+    @Autowired
+    private producerCategoriesRepository producerCategoriesRepository;
 
     @Override
     public categories addCategory(categories category) {
@@ -55,6 +58,15 @@ public class commonMethodServiceImpl implements commonMethodService{
         Optional<categories> sample = categoryRepository.findById(id);
         if (!sample.isPresent()){
             return "ERROR:Invalid Id";
+        }
+
+        List<productions> productions = sample.get().getProductsions();
+        for (com.intouncommon.backend.Entity.productions productions1 : productions){
+            List<productImages> productImages = productions1.getProductImages();
+            for (com.intouncommon.backend.Entity.productImages productImages1 : productImages){
+                productionImageRepository.deleteByImageId(productImages1.getId());
+            }
+            productionRepository.deleteByProductId(productions1.getId());
         }
         categoryRepository.deleteById(id);
         return "Successfully Deleted";
@@ -86,7 +98,19 @@ public class commonMethodServiceImpl implements commonMethodService{
         if (!sample.isPresent()){
             return "ERROR:Invalid Id";
         }
-        producerRepository.deleteById(id);
+        List<productions> productions = sample.get().getProductions();
+        for (com.intouncommon.backend.Entity.productions productions1 : productions){
+            List<productImages> productImages = productions1.getProductImages();
+            for (com.intouncommon.backend.Entity.productImages productImages1 : productImages){
+                productionImageRepository.deleteByImageId(productImages1.getId());
+            }
+            productionRepository.deleteByProductId(productions1.getId());
+        }
+     List<producerCategories> producerCategories = sample.get().getProducerCategories();
+        for (com.intouncommon.backend.Entity.producerCategories producerCategories1 : producerCategories){
+            producerCategoriesRepository.deleteByProducersCatId(producerCategories1.getId());
+        }
+        producerRepository.deleteByProducersId(id);
         return "Successfully Updated";
     }
 
@@ -96,8 +120,18 @@ public class commonMethodServiceImpl implements commonMethodService{
     }
 
     @Override
-    public productions addProduction(productions production) {
-        return productionRepository.save(production);
+    public productions addProduction(productionDto production) {
+
+        productions productions = production.getProductions();
+
+        categories existingcategory = categoryRepository.findById(production.getCategoryId()).orElseThrow(() ->
+                new ResourceNotFoundException("Location", "Id", productions.getId()));
+        productions.setCategory(existingcategory);
+
+        producers existingProducer = producerRepository.findById(production.getProducerId()).orElseThrow(() ->
+                new ResourceNotFoundException("Location", "Id", productions.getId()));
+        productions.setProducer(existingProducer);
+        return productionRepository.save(productions);
     }
 
     @Override
@@ -116,7 +150,11 @@ public class commonMethodServiceImpl implements commonMethodService{
         if (!sample.isPresent()){
             return "ERROR:Invalid Id";
         }
-        productionRepository.deleteById(id);
+        List<productImages> productImages = sample.get().getProductImages();
+        for (com.intouncommon.backend.Entity.productImages productImages1 : productImages){
+            productionImageRepository.deleteByImageId(productImages1.getId());
+        }
+        productionRepository.deleteByProductId(sample.get().getId());
         return "Successfully Updated";
     }
 
@@ -154,7 +192,7 @@ public class commonMethodServiceImpl implements commonMethodService{
         if (!sample.isPresent()){
             return "ERROR:Invalid Id";
         }
-        statecodesRepository.deleteById(id);
+        statecodesRepository.deleteByStateId(id);
         return "Successfully Updated";
     }
 
@@ -164,8 +202,21 @@ public class commonMethodServiceImpl implements commonMethodService{
     }
 
     @Override
-    public uncommonProduct addUncommonProduction(uncommonProduct uncommonProduct) {
-        return uncommonRepository.save(uncommonProduct);
+    public uncommonProduct addUncommonProduction(uncommonProductDto uncommonProduct) {
+        com.intouncommon.backend.Entity.uncommonProduct uncommonProduct1 = uncommonProduct.getUncommonProduct();
+
+        categories existingcategory = categoryRepository.findById(uncommonProduct.getCategoryId()).orElseThrow(() ->
+                new ResourceNotFoundException("Location", "Id", uncommonProduct1.getId()));
+        uncommonProduct1.setCategory(existingcategory);
+
+        producers existingProducer = producerRepository.findById(uncommonProduct.getProducerId()).orElseThrow(() ->
+                new ResourceNotFoundException("Location", "Id", uncommonProduct1.getId()));
+        uncommonProduct1.setProducer(existingProducer);
+
+        statecodes existingState = statecodesRepository.findById(uncommonProduct.getStateId()).orElseThrow(() ->
+                new ResourceNotFoundException("Location", "Id", uncommonProduct1.getId()));
+        uncommonProduct1.setStatecodes(existingState);
+        return uncommonRepository.save(uncommonProduct1);
     }
 
     @Override
