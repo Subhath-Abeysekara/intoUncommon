@@ -275,7 +275,7 @@ public class commonMethodServiceImpl implements commonMethodService{
 
 
         productions existingProduction = productionRepository.findById(productImageDTO.getProductId()).orElseThrow(() ->
-                new ResourceClosedException( "notfound"));
+                new ResourceNotFoundException("Location", "Id", productImageDTO.getProductId()));
         productImages.setProductions(existingProduction);
         return productionImageRepository.save(productImages);
     }

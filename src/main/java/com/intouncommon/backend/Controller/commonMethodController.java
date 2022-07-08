@@ -82,6 +82,11 @@ public class commonMethodController {
         return commonMethodService.deleteProduction(id);
     }
 
+    @PostMapping("/product/url/add")
+    private String addUrl(@RequestBody productImageDTO productImageDTO){
+        commonMethodService.addImageUrl(productImageDTO);
+        return "Successfully Added";
+    }
     /** Category **/
 
     @GetMapping("/getcategories")
