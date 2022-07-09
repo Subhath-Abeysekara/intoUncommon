@@ -85,7 +85,7 @@ public class commonMethodController {
     @PostMapping("/product/url/add")
     private String addUrl(@RequestBody productImageDTO productImageDTO){
         commonMethodService.addImageUrl(productImageDTO);
-        return "Successfully Added";
+        return "added";
     }
     /** Category **/
 
