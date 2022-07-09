@@ -167,6 +167,49 @@ public class commonMethodServiceImpl implements commonMethodService{
         return productResponse;
     }
 
+    public productResDto setProduct(productions productions){
+        productResDto productResDto = new productResDto();
+        productResDto.setAmount(productions.getAmount());
+        productResDto.setBrand(productions.getBrand());
+        productResDto.setColor(productions.getColor());
+        productResDto.setDelivery(productions.getDelivery());
+        productResDto.setId(productions.getId());
+        productResDto.setMaterial(productions.getMaterial());
+        productResDto.setOptions(productions.getOptions());
+        productResDto.setPrice(productions.getPrice());
+        productResDto.setSize(productions.getSize());
+        productResDto.setSpecialData(productions.getSpecialData());
+        productResDto.setUses(productions.getUses());
+        productResDto.setWarranty(productions.getWarranty());
+        productResDto.setDesignBy(null);
+        productResDto.setInventBy(null);
+        productResDto.setMadeIn(null);
+        productResDto.setQualityOf(null);
+        productResDto.setSpecialUsage(null);
+        return productResDto;
+    }
+
+    private productResDto setUncommon(uncommonProduct productions){
+        productResDto productResDto = new productResDto();
+        productResDto.setAmount(productions.getAmount());
+        productResDto.setBrand(productions.getBrand());
+        productResDto.setColor(productions.getColor());
+        productResDto.setDelivery(productions.getDelivery());
+        productResDto.setId(productions.getId());
+        productResDto.setMaterial(productions.getMaterial());
+        productResDto.setOptions(productions.getOptions());
+        productResDto.setPrice(productions.getPrice());
+        productResDto.setSize(productions.getSize());
+        productResDto.setSpecialData(productions.getSpecialData());
+        productResDto.setUses(productions.getUses());
+        productResDto.setWarranty(productions.getWarranty());
+        productResDto.setDesignBy(productions.getDesignBy());
+        productResDto.setInventBy(productions.getInventBy());
+        productResDto.setMadeIn(productions.getMadeIn());
+        productResDto.setQualityOf(productions.getQualityOf());
+        productResDto.setSpecialUsage(productions.getSpecialUsage());
+        return productResDto;
+    }
     @Override
     public List<productResDto> getProductions() {
         List<productResDto> productResDtos = new ArrayList<>();
@@ -174,14 +217,16 @@ public class commonMethodServiceImpl implements commonMethodService{
         List<producers> producers = producerRepository.findAll();
         List<productions> productions = productionRepository.findAll();
         for (com.intouncommon.backend.Entity.productions productions1 : productions){
-            productResDto productResDto = new productResDto();
-            productResDto.setProductions(productions1);
+            productResDto productResDto   = new productResDto();
+            Optional<uncommonProduct> uncommonProduct = uncommonRepository.findById(productions1.getId());
+            productResDto = uncommonProduct.map(this::setUncommon).orElseGet(() -> setProduct(productions1));
+
             for (com.intouncommon.backend.Entity.categories categories1: categories){
                 boolean logicCat = false;
                 List<productions> productionsList = categories1.getProductsions();
                 for (com.intouncommon.backend.Entity.productions productions2 : productionsList){
                     if (productions1.equals(productions2)){
-                        productResDto.setCategories(categories1);
+                        productResDto.setCategory(categories1);
                         logicCat=true;
                         break;
                     }
@@ -196,7 +241,7 @@ public class commonMethodServiceImpl implements commonMethodService{
                 List<productions> productionsList = producers1.getProductions();
                 for (com.intouncommon.backend.Entity.productions productions2 : productionsList){
                     if (productions1.equals(productions2)){
-                        productResDto.setProducers(producers1);
+                        productResDto.setProducer(producers1);
                         logicPro=true;
                         break;
                     }

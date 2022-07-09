@@ -5,34 +5,178 @@ import lombok.Data;
 @Data
 public class productResDto {
 
-    private productions productions;
-    private categories categories;
-    private producers producers;
+    private Long id;
+    private String uses;
+    private String specialData;
+    private String size;
+    private String color;
+    private String price;
+    private String material;
+    private String options;
+    private String warranty;
+    private String delivery;
+    private String brand;
+    private int amount=0;
+    private String specialUsage;
+    private String madeIn;
+    private String designBy;
+    private String inventBy;
+    private String qualityOf;
+    private categories category;
+    private producers producer;
 
     public productResDto() {
     }
 
-    public com.intouncommon.backend.Entity.productions getProductions() {
-        return productions;
+    public Long getId() {
+        return id;
     }
 
-    public void setProductions(com.intouncommon.backend.Entity.productions productions) {
-        this.productions = productions;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public com.intouncommon.backend.Entity.categories getCategories() {
-        return categories;
+    public String getUses() {
+        return uses;
     }
 
-    public void setCategories(com.intouncommon.backend.Entity.categories categories) {
-        this.categories = categories;
+    public void setUses(String uses) {
+        this.uses = uses;
     }
 
-    public com.intouncommon.backend.Entity.producers getProducers() {
-        return producers;
+    public String getSpecialData() {
+        return specialData;
     }
 
-    public void setProducers(com.intouncommon.backend.Entity.producers producers) {
-        this.producers = producers;
+    public void setSpecialData(String specialData) {
+        this.specialData = specialData;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public String getOptions() {
+        return options;
+    }
+
+    public void setOptions(String options) {
+        this.options = options;
+    }
+
+    public String getWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(String warranty) {
+        this.warranty = warranty;
+    }
+
+    public String getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(String delivery) {
+        this.delivery = delivery;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getSpecialUsage() {
+        return specialUsage;
+    }
+
+    public void setSpecialUsage(String specialUsage) {
+        this.specialUsage = specialUsage;
+    }
+
+    public String getMadeIn() {
+        return madeIn;
+    }
+
+    public void setMadeIn(String madeIn) {
+        this.madeIn = madeIn;
+    }
+
+    public String getDesignBy() {
+        return designBy;
+    }
+
+    public void setDesignBy(String designBy) {
+        this.designBy = designBy;
+    }
+
+    public String getInventBy() {
+        return inventBy;
+    }
+
+    public void setInventBy(String inventBy) {
+        this.inventBy = inventBy;
+    }
+
+    public String getQualityOf() {
+        return qualityOf;
+    }
+
+    public void setQualityOf(String qualityOf) {
+        this.qualityOf = qualityOf;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public categories getCategory() {
+        return category;
+    }
+
+    public void setCategory(categories category) {
+        this.category = category;
+    }
+
+    public producers getProducer() {
+        return producer;
+    }
+
+    public void setProducer(producers producer) {
+        this.producer = producer;
     }
 }
