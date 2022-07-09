@@ -215,18 +215,55 @@ public class commonMethodServiceImpl implements commonMethodService{
         List<productResDto> productResDtos = new ArrayList<>();
         List<categories> categories = categoryRepository.findAll();
         List<producers> producers = producerRepository.findAll();
+        System.out.println(producers);
         List<productions> productions = productionRepository.findAll();
+        System.out.println(productions);
         for (com.intouncommon.backend.Entity.productions productions1 : productions){
             productResDto productResDto   = new productResDto();
             Optional<uncommonProduct> uncommonProduct = uncommonRepository.findById(productions1.getId());
-            productResDto = uncommonProduct.map(this::setUncommon).orElseGet(() -> setProduct(productions1));
+            if (uncommonProduct.isPresent()){
+                productResDto = setUncommon(uncommonProduct.get());
+                Optional<statecodes> statecodes = statecodesRepository.findById(2L);
+                if (statecodes.isPresent()){
+                    System.out.println(statecodes.get());
+                    stateCodeDto stateCodeDto = new stateCodeDto();
+                    stateCodeDto.setStateId(statecodes.get().getStateId());
+                    stateCodeDto.setChangeColor(statecodes.get().getChangeColor());
+                    productResDto.setStatecodes(stateCodeDto);
+                }
+
+//                List<statecodes> statecodes = statecodesRepository.findAll();
+//                System.out.println("states"+statecodes);
+//                for (com.intouncommon.backend.Entity.statecodes statecodes1: statecodes){
+//                    boolean logicState = false;
+//                    List<uncommonProduct> productionsList = statecodes1.getUncommonProducts();
+//                    System.out.println(
+//                            "productList"+productionsList
+//                    );
+//                    for (com.intouncommon.backend.Entity.uncommonProduct productions2 : productionsList){
+//                        if (uncommonProduct.get().getId().equals(productions2.getId())){
+//                            productResDto.setStatecodes(statecodes1);
+//                            logicState=true;
+//                            break;
+//                        }
+//                    }
+//                    if (logicState){
+//                        break;
+//                    }
+//                }
+            }
 
             for (com.intouncommon.backend.Entity.categories categories1: categories){
                 boolean logicCat = false;
                 List<productions> productionsList = categories1.getProductsions();
                 for (com.intouncommon.backend.Entity.productions productions2 : productionsList){
                     if (productions1.equals(productions2)){
-                        productResDto.setCategory(categories1);
+                        categoryDto categoryDto = new categoryDto();
+                        categoryDto.setCategoryId(categories1.getCategoryId());
+                        categoryDto.setCommon(categories1.isCommon());
+                        categoryDto.setMaterial(categories1.getMaterial());
+                        categoryDto.setType(categories1.getType());
+                        productResDto.setCategory(categoryDto);
                         logicCat=true;
                         break;
                     }
@@ -241,7 +278,12 @@ public class commonMethodServiceImpl implements commonMethodService{
                 List<productions> productionsList = producers1.getProductions();
                 for (com.intouncommon.backend.Entity.productions productions2 : productionsList){
                     if (productions1.equals(productions2)){
-                        productResDto.setProducer(producers1);
+                        producerDto producerDto = new producerDto();
+                        producerDto.setProducerId(producers1.getProducerId());
+                        producerDto.setBasicDetails(producers1.getBasicDetails());
+                        producerDto.setName(producers1.getName());
+                        producerDto.setNicNo(producers1.getNicNo());
+                        productResDto.setProducer(producerDto);
                         logicPro=true;
                         break;
                     }

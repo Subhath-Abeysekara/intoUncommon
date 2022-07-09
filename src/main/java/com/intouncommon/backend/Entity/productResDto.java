@@ -22,8 +22,10 @@ public class productResDto {
     private String designBy;
     private String inventBy;
     private String qualityOf;
-    private categories category;
-    private producers producer;
+    private categoryDto category;
+    private producerDto producer;
+    private stateCodeDto statecodes;
+
 
     public productResDto() {
     }
@@ -164,19 +166,27 @@ public class productResDto {
         this.amount = amount;
     }
 
-    public categories getCategory() {
+    public categoryDto getCategory() {
         return category;
     }
 
-    public void setCategory(categories category) {
+    public void setCategory(categoryDto category) {
         this.category = category;
     }
 
-    public producers getProducer() {
+    public producerDto getProducer() {
         return producer;
     }
 
-    public void setProducer(producers producer) {
+    public void setProducer(producerDto producer) {
         this.producer = producer;
+    }
+
+    public stateCodeDto getStatecodes() {
+        return statecodes;
+    }
+
+    public void setStatecodes(stateCodeDto statecodes) {
+        this.statecodes = statecodes;
     }
 }
