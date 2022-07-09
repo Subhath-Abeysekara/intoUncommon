@@ -181,6 +181,7 @@ public class commonMethodServiceImpl implements commonMethodService{
         productResDto.setSpecialData(productions.getSpecialData());
         productResDto.setUses(productions.getUses());
         productResDto.setWarranty(productions.getWarranty());
+        productResDto.setProductImages(productions.getProductImages());
         productResDto.setDesignBy(null);
         productResDto.setInventBy(null);
         productResDto.setMadeIn(null);
@@ -208,6 +209,7 @@ public class commonMethodServiceImpl implements commonMethodService{
         productResDto.setMadeIn(productions.getMadeIn());
         productResDto.setQualityOf(productions.getQualityOf());
         productResDto.setSpecialUsage(productions.getSpecialUsage());
+        productResDto.setProductImages(productions.getProductImages());
         return productResDto;
     }
     @Override

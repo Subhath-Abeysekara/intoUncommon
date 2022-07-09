@@ -2,6 +2,8 @@ package com.intouncommon.backend.Entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class productResDto {
 
@@ -17,6 +19,7 @@ public class productResDto {
     private String delivery;
     private String brand;
     private int amount=0;
+    private List<productImages> productImages;
     private String specialUsage;
     private String madeIn;
     private String designBy;
@@ -188,5 +191,13 @@ public class productResDto {
 
     public void setStatecodes(stateCodeDto statecodes) {
         this.statecodes = statecodes;
+    }
+
+    public List<com.intouncommon.backend.Entity.productImages> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(List<com.intouncommon.backend.Entity.productImages> productImages) {
+        this.productImages = productImages;
     }
 }
