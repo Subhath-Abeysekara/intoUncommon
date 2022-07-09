@@ -62,7 +62,7 @@ public class commonMethodController {
     /** productions **/
 
     @GetMapping("/getproducts")
-    private List<productions> getAllProducts(){
+    private List<productResDto> getAllProducts(){
         return commonMethodService.getProductions();
     }
 

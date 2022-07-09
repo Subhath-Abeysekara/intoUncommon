@@ -9,6 +9,7 @@ import org.springframework.boot.context.config.ConfigDataResourceNotFoundExcepti
 import com.intouncommon.backend.Repository.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -167,8 +168,48 @@ public class commonMethodServiceImpl implements commonMethodService{
     }
 
     @Override
-    public List<productions> getProductions() {
-        return productionRepository.findAll();
+    public List<productResDto> getProductions() {
+        List<productResDto> productResDtos = new ArrayList<>();
+        List<categories> categories = categoryRepository.findAll();
+        List<producers> producers = producerRepository.findAll();
+        List<productions> productions = productionRepository.findAll();
+        for (com.intouncommon.backend.Entity.productions productions1 : productions){
+            productResDto productResDto = new productResDto();
+            productResDto.setProductions(productions1);
+            for (com.intouncommon.backend.Entity.categories categories1: categories){
+                boolean logicCat = false;
+                List<productions> productionsList = categories1.getProductsions();
+                for (com.intouncommon.backend.Entity.productions productions2 : productionsList){
+                    if (productions1.equals(productions2)){
+                        productResDto.setCategories(categories1);
+                        logicCat=true;
+                        break;
+                    }
+                }
+                if (logicCat){
+                    break;
+                }
+            }
+
+            for (com.intouncommon.backend.Entity.producers producers1: producers){
+                boolean logicPro = false;
+                List<productions> productionsList = producers1.getProductions();
+                for (com.intouncommon.backend.Entity.productions productions2 : productionsList){
+                    if (productions1.equals(productions2)){
+                        productResDto.setProducers(producers1);
+                        logicPro=true;
+                        break;
+                    }
+                }
+                if (logicPro){
+                    break;
+                }
+            }
+
+            productResDtos.add(productResDto);
+        }
+
+        return productResDtos;
     }
 
     @Override
