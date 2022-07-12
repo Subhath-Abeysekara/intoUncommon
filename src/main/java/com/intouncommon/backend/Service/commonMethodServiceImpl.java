@@ -225,34 +225,42 @@ public class commonMethodServiceImpl implements commonMethodService{
             Optional<uncommonProduct> uncommonProduct = uncommonRepository.findById(productions1.getId());
             if (uncommonProduct.isPresent()){
                 productResDto = setUncommon(uncommonProduct.get());
-                Optional<statecodes> statecodes = statecodesRepository.findById(2L);
-                if (statecodes.isPresent()){
-                    System.out.println(statecodes.get());
-                    stateCodeDto stateCodeDto = new stateCodeDto();
-                    stateCodeDto.setStateId(statecodes.get().getStateId());
-                    stateCodeDto.setChangeColor(statecodes.get().getChangeColor());
-                    productResDto.setStatecodes(stateCodeDto);
-                }
-
-//                List<statecodes> statecodes = statecodesRepository.findAll();
-//                System.out.println("states"+statecodes);
-//                for (com.intouncommon.backend.Entity.statecodes statecodes1: statecodes){
-//                    boolean logicState = false;
-//                    List<uncommonProduct> productionsList = statecodes1.getUncommonProducts();
-//                    System.out.println(
-//                            "productList"+productionsList
-//                    );
-//                    for (com.intouncommon.backend.Entity.uncommonProduct productions2 : productionsList){
-//                        if (uncommonProduct.get().getId().equals(productions2.getId())){
-//                            productResDto.setStatecodes(statecodes1);
-//                            logicState=true;
-//                            break;
-//                        }
-//                    }
-//                    if (logicState){
-//                        break;
-//                    }
+//                Optional<statecodes> statecodes = statecodesRepository.findById(1L);
+//                if (statecodes.isPresent()){
+//                    System.out.println(statecodes.get());
+//                    stateCodeDto stateCodeDto = new stateCodeDto();
+//                    stateCodeDto.setStateId(statecodes.get().getStateId());
+//                    stateCodeDto.setChangeColor(statecodes.get().getChangeColor());
+//                    productResDto.setStatecodes(stateCodeDto);
 //                }
+
+                List<statecodes> statecodes = statecodesRepository.findAll();
+                System.out.println("states"+statecodes);
+                for (com.intouncommon.backend.Entity.statecodes statecodes1: statecodes){
+                    boolean logicState = false;
+                    List<uncommonProduct> productionsList = statecodes1.getUncommonProducts();
+                    System.out.println(
+                            "productList"+productionsList
+                    );
+                    for (com.intouncommon.backend.Entity.uncommonProduct productions2 : productionsList){
+                        if (uncommonProduct.get().getId().equals(productions2.getId())){
+                            System.out.println(statecodes1);
+                    stateCodeDto stateCodeDto = new stateCodeDto();
+                    stateCodeDto.setStateId(statecodes1.getStateId());
+                    stateCodeDto.setChangeColor(statecodes1.getChangeColor());
+                            stateCodeDto.setRepayColor(statecodes1.getRepayColor());
+                            stateCodeDto.setDiscountColor(statecodes1.getDiscountColor());
+                            stateCodeDto.setWarrantyColor(statecodes1.getWarrantyColor());
+                    productResDto.setStatecodes(stateCodeDto);
+                            productResDto.setStatecodes(stateCodeDto);
+                            logicState=true;
+                            break;
+                        }
+                    }
+                    if (logicState){
+                        break;
+                    }
+                }
             }
 
             for (com.intouncommon.backend.Entity.categories categories1: categories){
