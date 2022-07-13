@@ -1,11 +1,13 @@
 package com.intouncommon.backend.Service;
 
-import com.intouncommon.backend.Entity.productions;
+import com.intouncommon.backend.Entity.*;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface mainService {
+    String checkCommon(commonCheckDto commonCheckDto);
+    String checkUncommon(uncommonCheckDto uncommonCheckDto);
     List<Long> getAllCategoryIds(boolean common);
     String getCategoryType(Long id);
     List<Long> getProductIds(Long id);

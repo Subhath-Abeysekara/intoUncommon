@@ -18,6 +18,16 @@ public class mainController {
     private mainService mainService;
 
 
+    @GetMapping("/checkCommon")
+    private String checkCom(@RequestBody commonCheckDto commonCheckDto){
+        return mainService.checkCommon(commonCheckDto);
+    }
+
+    @GetMapping("/checkUncommon")
+    private String checkUncom(@RequestBody uncommonCheckDto commonCheckDto){
+        return mainService.checkUncommon(commonCheckDto);
+    }
+
     @GetMapping("/get/category/ids")
     private List<Long> getCategoriesIds(@RequestParam boolean common){
         return mainService.getAllCategoryIds(common);

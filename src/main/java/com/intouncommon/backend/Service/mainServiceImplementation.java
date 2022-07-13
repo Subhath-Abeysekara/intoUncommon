@@ -1,6 +1,9 @@
 package com.intouncommon.backend.Service;
 
+import com.intouncommon.backend.Entity.commonCheckDto;
 import com.intouncommon.backend.Entity.productions;
+import com.intouncommon.backend.Entity.uncommonCheckDto;
+import com.intouncommon.backend.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +30,44 @@ public class mainServiceImplementation implements mainService {
 
     @Autowired
     private com.intouncommon.backend.Repository.userRepository userRepository;
+
+    @Override
+    public String checkCommon(commonCheckDto commonCheckDto) {
+        if (commonCheckDto.getCategoryId()!=null||commonCheckDto.getProducerId()!=null){
+            Optional<categories> category = categoryRepository.findById(commonCheckDto.getCategoryId());
+            if (category.isPresent()){
+                if (category.get().isCommon()){
+                    Optional<producers> producer = producerRepository.findById(commonCheckDto.getProducerId());
+                    if (producer.isPresent()){
+                        return "success";
+                    }
+                }
+            }
+        }
+
+        return "error";
+     }
+
+    @Override
+    public String checkUncommon(uncommonCheckDto uncommonCheckDto) {
+        if (uncommonCheckDto.getCategoryId()!=null||uncommonCheckDto.getProducerId()!=null||uncommonCheckDto.getStateId()!=null){
+            
+            Optional<categories> category = categoryRepository.findById(uncommonCheckDto.getCategoryId());
+            if (category.isPresent()){
+                if (!category.get().isCommon()){
+                    Optional<producers> producer = producerRepository.findById(uncommonCheckDto.getProducerId());
+                    if (producer.isPresent()){
+                        Optional<statecodes> statecode = statecodesRepository.findById(uncommonCheckDto.getStateId());
+                        if (statecode.isPresent()){
+                            return "success";
+                        }
+                    }
+                }
+            }
+        }
+
+        return "error";
+    }
 
     @Override
     public List<Long> getAllCategoryIds(boolean common) {

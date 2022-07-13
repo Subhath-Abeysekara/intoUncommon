@@ -39,6 +39,8 @@ public class commonMethodServiceImpl implements commonMethodService{
     @Autowired
     private producerCategoriesRepository producerCategoriesRepository;
 
+
+
     @Override
     public categories addCategory(categories category) {
         return categoryRepository.save(category);
