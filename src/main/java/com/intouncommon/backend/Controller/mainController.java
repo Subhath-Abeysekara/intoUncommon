@@ -18,12 +18,12 @@ public class mainController {
     private mainService mainService;
 
 
-    @GetMapping("/checkCommon")
+    @PostMapping("/checkCommon")
     private String checkCom(@RequestBody commonCheckDto commonCheckDto){
         return mainService.checkCommon(commonCheckDto);
     }
 
-    @GetMapping("/checkUncommon")
+    @PostMapping("/checkUncommon")
     private String checkUncom(@RequestBody uncommonCheckDto commonCheckDto){
         return mainService.checkUncommon(commonCheckDto);
     }
