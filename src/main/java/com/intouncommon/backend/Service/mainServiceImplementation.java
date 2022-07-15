@@ -33,7 +33,7 @@ public class mainServiceImplementation implements mainService {
 
     @Override
     public String checkCommon(commonCheckDto commonCheckDto) {
-        if (commonCheckDto.getCategoryId()!=null||commonCheckDto.getProducerId()!=null){
+        if (commonCheckDto.getCategoryId()!=0||commonCheckDto.getProducerId()!=0){
             Optional<categories> category = categoryRepository.findById(commonCheckDto.getCategoryId());
             if (category.isPresent()){
                 if (category.get().isCommon()){
@@ -50,7 +50,7 @@ public class mainServiceImplementation implements mainService {
 
     @Override
     public String checkUncommon(uncommonCheckDto uncommonCheckDto) {
-        if (uncommonCheckDto.getCategoryId()!=null||uncommonCheckDto.getProducerId()!=null||uncommonCheckDto.getStateId()!=null){
+        if (uncommonCheckDto.getCategoryId()!=0||uncommonCheckDto.getProducerId()!=0||uncommonCheckDto.getStateId()!=0){
             
             Optional<categories> category = categoryRepository.findById(uncommonCheckDto.getCategoryId());
             if (category.isPresent()){
