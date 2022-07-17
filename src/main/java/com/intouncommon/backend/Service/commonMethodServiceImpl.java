@@ -123,7 +123,7 @@ public class commonMethodServiceImpl implements commonMethodService{
     }
 
     @Override
-    public productions addProduction(productionDto production) {
+    public Long addProduction(productionDto production) {
 
         productions productions = production.getProductions();
 
@@ -134,7 +134,7 @@ public class commonMethodServiceImpl implements commonMethodService{
         producers existingProducer = producerRepository.findById(production.getProducerId()).orElseThrow(() ->
                 new ResourceNotFoundException("Location", "Id", productions.getId()));
         productions.setProducer(existingProducer);
-        return productionRepository.save(productions);
+        return productionRepository.save(productions).getId();
     }
 
     @Override

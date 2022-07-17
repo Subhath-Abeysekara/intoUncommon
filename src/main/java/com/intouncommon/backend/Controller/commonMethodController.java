@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/intouncommon")
-@CrossOrigin(origins = "http://www.intouncommon.com")
+@CrossOrigin(origins = "http://localhost:3000")
 public class commonMethodController {
 
     @Autowired
@@ -67,9 +67,9 @@ public class commonMethodController {
     }
 
     @PostMapping(value="/product/add" ,consumes = "application/json", produces = "application/json")
-    private String addProduct(@RequestBody productionDto production){
-        commonMethodService.addProduction(production);
-        return "Successfully Added";
+    private Long addProduct(@RequestBody productionDto production){
+        return commonMethodService.addProduction(production);
+       // return "Successfully Added";
     }
 
     @PutMapping("/product/update")
