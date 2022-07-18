@@ -157,9 +157,9 @@ public class commonMethodController {
     /** Uncommon **/
 
     @PostMapping("/uncommon/add")
-    private String addUncommon(@RequestBody uncommonProductDto uncommonProduct){
-        commonMethodService.addUncommonProduction(uncommonProduct);
-        return "Successfully Added";
+    private Long addUncommon(@RequestBody uncommonProductDto uncommonProduct){
+        return commonMethodService.addUncommonProduction(uncommonProduct);
+        //return "Successfully Added";
     }
 
     @PutMapping("/uncommon/update")

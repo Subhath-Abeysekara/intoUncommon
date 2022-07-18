@@ -342,7 +342,7 @@ public class commonMethodServiceImpl implements commonMethodService{
     }
 
     @Override
-    public uncommonProduct addUncommonProduction(uncommonProductDto uncommonProduct) {
+    public Long addUncommonProduction(uncommonProductDto uncommonProduct) {
         com.intouncommon.backend.Entity.uncommonProduct uncommonProduct1 = uncommonProduct.getUncommonProduct();
 
         categories existingcategory = categoryRepository.findById(uncommonProduct.getCategoryId()).orElseThrow(() ->
@@ -356,7 +356,7 @@ public class commonMethodServiceImpl implements commonMethodService{
         statecodes existingState = statecodesRepository.findById(uncommonProduct.getStateId()).orElseThrow(() ->
                 new ResourceNotFoundException("Location", "Id", uncommonProduct1.getId()));
         uncommonProduct1.setStatecodes(existingState);
-        return uncommonRepository.save(uncommonProduct1);
+        return uncommonRepository.save(uncommonProduct1).getId();
     }
 
     @Override

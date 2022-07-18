@@ -23,7 +23,7 @@ public interface commonMethodService {
     String updateStateCode(Long id, statecodes statecode);
     String deleteStateCode(Long id);
     List<statecodes> getAllStates();
-    uncommonProduct addUncommonProduction(uncommonProductDto uncommonProduct);
+    Long addUncommonProduction(uncommonProductDto uncommonProduct);
     String updateUncommonProduction(Long id, uncommonProduct uncommonProduct);
     String deleteUncommonProduction(Long id);
     users addUser(users user);
