@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/intouncommon")
-@CrossOrigin(origins = "http://intouncommon.com")
+@CrossOrigin(origins = "http://www.intouncommon.com")
 public class commonMethodController {
 
     @Autowired
