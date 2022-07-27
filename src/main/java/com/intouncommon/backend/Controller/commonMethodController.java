@@ -90,13 +90,9 @@ public class commonMethodController {
     /** Category **/
 
     @GetMapping("/getcategories")
-    private List<categories> getAllCategories(@RequestHeader String header) throws Exception {
+    private List<categories> getAllCategories(){
         
-        if(adminService.checkTokenValidity(header)){
-           return commonMethodService.getAllCategories();
-        }
-        return null;
-        
+       return commonMethodService.getAllCategories();
     }
 
     @PostMapping("/category/add")
