@@ -1,17 +1,23 @@
 package com.intouncommon.backend.Service;
 
 import com.intouncommon.backend.Entity.admin;
+import com.intouncommon.backend.Entity.login;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
+import com.intouncommon.backend.Repository.loginRepository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class adminServiceImplement implements adminService {
 
     @Autowired
     private com.intouncommon.backend.Repository.adminRepository adminRepository;
+
+    @Autowired
+    private loginRepository loginRepository;
 
     public String getPw(String username) {
         admin admin = adminRepository.findByUsername(username);
@@ -168,5 +174,53 @@ public class adminServiceImplement implements adminService {
         adminRepository.setPassword(oldPassword,password);
 
         return "successfully changed";
+    }
+
+    @Override
+    public boolean getLoginStatus() {
+        Optional<login> login = loginRepository.findById(1);
+        return login.map(com.intouncommon.backend.Entity.login::isLoginStats).orElse(false);
+    }
+
+    @Override
+    public String setLoginStatus() {
+        Optional<login> login = loginRepository.findById(1);
+        if (login.isPresent()){
+            login.get().setLoginStats(false);
+            loginRepository.save(login.get());
+            return "successfully";
+        }
+
+        return "error";
+    }
+
+    @Override
+    public int addLogin(login login) {
+        return loginRepository.save(login).getId();
+    }
+
+    @Override
+    public login getLogin() {
+        return loginRepository.findById(1).get();
+    }
+
+    @Scheduled(fixedRate = 10000L)
+    private void loginSetting(){
+        Optional<login> login = loginRepository.findById(1);
+        if (login.isPresent()){
+            com.intouncommon.backend.Entity.login login1 = login.get();
+            if (!login1.isLoginStats()){
+                int loginCount = login1.getLoginCount();
+                loginCount++;
+                login1.setLoginCount(loginCount);
+                loginRepository.save(login1);
+               // System.out.println(login1.getLoginCount());
+                if (login1.getLoginCount()>=400){
+                    login1.setLoginStats(true);
+                    login1.setLoginCount(0);
+                    loginRepository.save(login1);
+                }
+            }
+        }
     }
 }

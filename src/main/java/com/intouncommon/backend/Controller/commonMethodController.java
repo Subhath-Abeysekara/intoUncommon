@@ -39,6 +39,26 @@ public class commonMethodController {
     private String changeAdmin(@RequestBody oldadmin admin){
         return adminService.changeAdmin(admin.getOldUsername(),admin.getUsername(),admin.getOldPassword(),admin.getPassword());
     }
+
+    @PostMapping("/addLogin")
+    private int addLogin(@RequestBody login login){
+        return adminService.addLogin(login);
+    }
+
+    @GetMapping("/getLogin")
+    private boolean getLogin(){
+        return adminService.getLoginStatus();
+    }
+
+    @GetMapping("/getLoginFull")
+    private login getLoginFull(){
+        return adminService.getLogin();
+    }
+
+    @PutMapping("/setLogin")
+    private String setLogin(){
+        return adminService.setLoginStatus();
+    }
     @GetMapping("/test")
     private String test(@RequestParam String name,@RequestParam String age){
 
@@ -83,15 +103,26 @@ public class commonMethodController {
     }
 
     @PostMapping("/product/url/add")
-    private String addUrl(@RequestBody productImageDTO productImageDTO){
-        commonMethodService.addImageUrl(productImageDTO);
-        return "added";
+    private String addUrl(@RequestBody productImageDTO productImageDTO,@RequestHeader String header) throws Exception {
+
+
+        if(adminService.checkTokenValidity(header)){
+            commonMethodService.addImageUrl(productImageDTO);
+            return "added";
+        }
+        return "Wrong token";
     }
     /** Category **/
 
     @GetMapping("/getcategories")
-    private List<categories> getAllCategories(){
-        return commonMethodService.getAllCategories();
+
+    private List<categories> getAllCategories(@RequestHeader String header) throws Exception {
+
+        if(adminService.checkTokenValidity(header)){
+            return commonMethodService.getAllCategories();
+        }
+        return null;
+
     }
 
     @PostMapping("/category/add")
