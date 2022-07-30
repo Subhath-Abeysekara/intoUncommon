@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/intouncommon")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class commonMethodController {
 
     @Autowired
@@ -38,26 +38,6 @@ public class commonMethodController {
     @PutMapping ("/changeAdmin")
     private String changeAdmin(@RequestBody oldadmin admin){
         return adminService.changeAdmin(admin.getOldUsername(),admin.getUsername(),admin.getOldPassword(),admin.getPassword());
-    }
-
-    @PostMapping("/addLogin")
-    private int addLogin(@RequestBody login login){
-        return adminService.addLogin(login);
-    }
-
-    @GetMapping("/getLogin")
-    private boolean getLogin(){
-        return adminService.getLoginStatus();
-    }
-
-    @GetMapping("/getLoginFull")
-    private login getLoginFull(){
-        return adminService.getLogin();
-    }
-
-    @PutMapping("/setLogin")
-    private String setLogin(){
-        return adminService.setLoginStatus();
     }
     @GetMapping("/test")
     private String test(@RequestParam String name,@RequestParam String age){
@@ -103,26 +83,15 @@ public class commonMethodController {
     }
 
     @PostMapping("/product/url/add")
-    private String addUrl(@RequestBody productImageDTO productImageDTO,@RequestHeader String header) throws Exception {
-
-
-        if(adminService.checkTokenValidity(header)){
-            commonMethodService.addImageUrl(productImageDTO);
-            return "added";
-        }
-        return "Wrong token";
+    private String addUrl(@RequestBody productImageDTO productImageDTO){
+        commonMethodService.addImageUrl(productImageDTO);
+        return "added";
     }
     /** Category **/
 
     @GetMapping("/getcategories")
-
-    private List<categories> getAllCategories(@RequestHeader String header) throws Exception {
-
-        if(adminService.checkTokenValidity(header)){
-            return commonMethodService.getAllCategories();
-        }
-        return null;
-
+    private List<categories> getAllCategories(){
+        return commonMethodService.getAllCategories();
     }
 
     @PostMapping("/category/add")
