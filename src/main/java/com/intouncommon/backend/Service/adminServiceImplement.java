@@ -215,7 +215,7 @@ public class adminServiceImplement implements adminService {
                 login1.setLoginCount(loginCount);
                 loginRepository.save(login1);
                // System.out.println(login1.getLoginCount());
-                if (login1.getLoginCount()>=400){
+                if (login1.getLoginCount()>=60){
                     login1.setLoginStats(true);
                     login1.setLoginCount(0);
                     loginRepository.save(login1);
