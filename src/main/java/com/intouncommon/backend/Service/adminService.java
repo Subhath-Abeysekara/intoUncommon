@@ -7,7 +7,7 @@ public interface adminService {
     boolean checkTokenValidity(String token) throws Exception;
     admin addAdmin(admin admin);
     String changeAdmin(String oldUsername,String username,String oldPassword,String password);
-    boolean getLoginStatus();
+    String getLoginStatus();
     String setLoginStatus();
     int addLogin(login login);
     login getLogin();
