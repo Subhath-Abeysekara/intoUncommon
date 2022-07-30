@@ -39,6 +39,27 @@ public class commonMethodController {
     private String changeAdmin(@RequestBody oldadmin admin){
         return adminService.changeAdmin(admin.getOldUsername(),admin.getUsername(),admin.getOldPassword(),admin.getPassword());
     }
+
+    @GetMapping("/getLogin/status")
+    private boolean getLogin(){
+        return adminService.getLoginStatus();
+    }
+
+    @PostMapping("/addLogin")
+    private int addLogin(login login){
+        return adminService.addLogin(login);
+    }
+
+    @GetMapping("/getLogin")
+    private login getLoginFull(){
+        return adminService.getLogin();
+    }
+
+    @PutMapping("/setLogin/status")
+    private String setLogin(){
+        return adminService.setLoginStatus();
+    }
+
     @GetMapping("/test")
     private String test(@RequestParam String name,@RequestParam String age){
 
