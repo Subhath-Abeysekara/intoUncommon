@@ -41,8 +41,14 @@ public class commonMethodController {
     }
 
     @GetMapping("/getLogin/status")
-    private boolean getLogin(){
-        return adminService.getLoginStatus();
+    private String getLogin(){
+        
+        if(adminService.getLoginStatus()){
+        
+            return "true";
+        }
+            
+        return "false";
     }
 
     @PostMapping("/addLogin")
