@@ -2,12 +2,14 @@ package com.intouncommon.backend.Service;
 
 import com.intouncommon.backend.Entity.admin;
 import com.intouncommon.backend.Entity.login;
+import com.intouncommon.backend.Entity.logins;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import com.intouncommon.backend.Repository.loginRepository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -177,50 +179,60 @@ public class adminServiceImplement implements adminService {
     }
 
     @Override
-    public boolean getLoginStatus() {
-        Optional<login> login = loginRepository.findById(1);
-        return login.map(com.intouncommon.backend.Entity.login::isLoginStats).orElse(false);
+    public boolean getLoginStatus(String ip) {
+        Optional<logins> login = loginRepository.findByIpAddress(ip);
+
+        return login.map(logins::isLoginStats).orElse(true);
+
     }
 
     @Override
-    public String setLoginStatus() {
-        Optional<login> login = loginRepository.findById(1);
+    public String setLoginStatus(String ip) {
+        Optional<logins> login = loginRepository.findByIpAddress(ip);
         if (login.isPresent()){
             login.get().setLoginStats(false);
             loginRepository.save(login.get());
             return "successfully";
         }
+        else {
+            logins login1 = new logins();
+            login1.setIpAddress(ip);
+            login1.setLoginStats(false);
+            loginRepository.save(login1);
 
-        return "error";
+            return "success";
+        }
+
+
     }
 
     @Override
-    public int addLogin(login login) {
+    public int addLogin(logins login) {
         return loginRepository.save(login).getId();
     }
 
     @Override
-    public login getLogin() {
-        return loginRepository.findById(1).get();
+    public List<logins> getLogin() {
+        return loginRepository.findAll();
     }
 
     @Scheduled(fixedRate = 10000L)
     private void loginSetting(){
-        Optional<login> login = loginRepository.findById(1);
-        if (login.isPresent()){
-            com.intouncommon.backend.Entity.login login1 = login.get();
-            if (!login1.isLoginStats()){
-                int loginCount = login1.getLoginCount();
-                loginCount++;
-                login1.setLoginCount(loginCount);
-                loginRepository.save(login1);
-               // System.out.println(login1.getLoginCount());
-                if (login1.getLoginCount()>=120){
-                    login1.setLoginStats(true);
-                    login1.setLoginCount(0);
+        List<logins> logins  = loginRepository.findAll();
+
+        for (logins login1 : logins){
+            if (!login1.isLoginStats()) {
+                    int loginCount = login1.getLoginCount();
+                    loginCount++;
+                    login1.setLoginCount(loginCount);
                     loginRepository.save(login1);
+                    // System.out.println(login1.getLoginCount());
+                    if (login1.getLoginCount() >= 120) {
+                        login1.setLoginStats(true);
+                        login1.setLoginCount(0);
+                        loginRepository.save(login1);
+                    }
                 }
-            }
         }
     }
 }

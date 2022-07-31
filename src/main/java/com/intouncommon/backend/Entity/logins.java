@@ -6,8 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class login {
-    
+public class logins {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,7 +15,7 @@ public class login {
     private int loginCount = 0;
     private String ipAddress = "214.123.234.2";
 
-    public login() {
+    public logins() {
     }
 
     public String getIpAddress() {

@@ -22,8 +22,8 @@ public class commonMethodController {
     /**Security **/
 
     @PostMapping("/getKey")
-    private String getKey(@RequestBody admin admin){
-        if(adminService.getLoginStatus()){
+    private String getKey(@RequestBody admin admin ,@RequestParam String ip){
+        if(adminService.getLoginStatus(ip)){
 
             return adminService.madeSecreteKey(admin.getUsername(),admin.getPassword());
         }
@@ -47,9 +47,9 @@ public class commonMethodController {
     }
 
     @GetMapping("/getLogin/status")
-    private String getLogin(){
+    private String getLogin(@RequestParam String ip){
         
-        if(adminService.getLoginStatus()){
+        if(adminService.getLoginStatus(ip)){
         
             return "true";
         }
@@ -58,18 +58,18 @@ public class commonMethodController {
     }
 
     @PostMapping("/addLogin")
-    private int addLogin(login login){
+    private int addLogin(logins login){
         return adminService.addLogin(login);
     }
 
     @GetMapping("/getLogin")
-    private login getLoginFull(){
+    private List<logins> getLoginFull(){
         return adminService.getLogin();
     }
 
     @PutMapping("/setLogin/status")
-    private String setLogin(){
-        return adminService.setLoginStatus();
+    private String setLogin(@RequestParam String ip){
+        return adminService.setLoginStatus(ip);
     }
 
     @GetMapping("/test")
