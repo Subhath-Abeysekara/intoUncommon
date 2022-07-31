@@ -23,7 +23,13 @@ public class commonMethodController {
 
     @PostMapping("/getKey")
     private String getKey(@RequestBody admin admin){
-        return adminService.madeSecreteKey(admin.getUsername(),admin.getPassword());
+        if(adminService.getLoginStatus()){
+
+            return adminService.madeSecreteKey(admin.getUsername(),admin.getPassword());
+        }
+
+        return "Error username or password";
+
     }
     @PostMapping("/checkAdmin")
     private String checkAdmin(@RequestBody admin admin){
