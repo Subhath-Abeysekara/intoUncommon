@@ -25,12 +25,21 @@ public class productResDto {
     private String designBy;
     private String inventBy;
     private String qualityOf;
+    private String addDate;
     private categoryDto category;
     private producerDto producer;
     private stateCodeDto statecodes;
 
 
     public productResDto() {
+    }
+
+    public String getAddDate() {
+        return addDate;
+    }
+
+    public void setAddDate(String addDate) {
+        this.addDate = addDate;
     }
 
     public Long getId() {

@@ -184,6 +184,7 @@ public class commonMethodServiceImpl implements commonMethodService{
         productResDto.setUses(productions.getUses());
         productResDto.setWarranty(productions.getWarranty());
         productResDto.setProductImages(productions.getProductImages());
+        productResDto.setAddDate(productions.getAddDate());
         productResDto.setDesignBy(null);
         productResDto.setInventBy(null);
         productResDto.setMadeIn(null);
@@ -212,6 +213,7 @@ public class commonMethodServiceImpl implements commonMethodService{
         productResDto.setQualityOf(productions.getQualityOf());
         productResDto.setSpecialUsage(productions.getSpecialUsage());
         productResDto.setProductImages(productions.getProductImages());
+        productResDto.setAddDate(productions.getAddDate());
         return productResDto;
     }
     @Override
@@ -219,9 +221,9 @@ public class commonMethodServiceImpl implements commonMethodService{
         List<productResDto> productResDtos = new ArrayList<>();
         List<categories> categories = categoryRepository.findAll();
         List<producers> producers = producerRepository.findAll();
-        System.out.println(producers);
+       // System.out.println(producers);
         List<productions> productions = productionRepository.findAll();
-        System.out.println(productions);
+       // System.out.println(productions);
         for (com.intouncommon.backend.Entity.productions productions1 : productions){
             productResDto productResDto   = new productResDto();
             Optional<uncommonProduct> uncommonProduct = uncommonRepository.findById(productions1.getId());
@@ -237,16 +239,14 @@ public class commonMethodServiceImpl implements commonMethodService{
 //                }
 
                 List<statecodes> statecodes = statecodesRepository.findAll();
-                System.out.println("states"+statecodes);
+                //System.out.println("states"+statecodes);
                 for (com.intouncommon.backend.Entity.statecodes statecodes1: statecodes){
                     boolean logicState = false;
                     List<uncommonProduct> productionsList = statecodes1.getUncommonProducts();
-                    System.out.println(
-                            "productList"+productionsList
-                    );
+                    //
                     for (com.intouncommon.backend.Entity.uncommonProduct productions2 : productionsList){
                         if (uncommonProduct.get().getId().equals(productions2.getId())){
-                            System.out.println(statecodes1);
+                           // System.out.println(statecodes1);
                     stateCodeDto stateCodeDto = new stateCodeDto();
                     stateCodeDto.setStateId(statecodes1.getStateId());
                     stateCodeDto.setChangeColor(statecodes1.getChangeColor());
@@ -263,6 +263,9 @@ public class commonMethodServiceImpl implements commonMethodService{
                         break;
                     }
                 }
+            }
+            else {
+                productResDto = setProduct(productions1);
             }
 
             for (com.intouncommon.backend.Entity.categories categories1: categories){

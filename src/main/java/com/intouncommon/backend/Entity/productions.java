@@ -24,6 +24,7 @@ public class productions {
     private String delivery;
     private String brand;
     private int amount=0;
+    private String addDate;
 
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
@@ -158,6 +159,14 @@ public class productions {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getAddDate() {
+        return addDate;
+    }
+
+    public void setAddDate(String addDate) {
+        this.addDate = addDate;
     }
 
     public List<com.intouncommon.backend.Entity.productImages> getProductImages() {
