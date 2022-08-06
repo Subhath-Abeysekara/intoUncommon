@@ -98,4 +98,16 @@ public class pendingProducerServiceImpl implements pendingProducerService{
         }
         return "error id";
     }
+
+    @Override
+    public Long getLatestId() {
+        List<pendingProducts> pendingProducts = pendingProductRepository.findAll();
+        Long latest = 0L;
+        for(com.intouncommon.backend.Entity.pendingProducts pendingProducts1 : pendingProducts){
+            if (pendingProducts1.getId()>latest){
+                latest=pendingProducts1.getId();
+            }
+        }
+        return latest+1;
+    }
 }

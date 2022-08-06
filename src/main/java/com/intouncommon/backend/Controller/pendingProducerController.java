@@ -29,6 +29,11 @@ public class pendingProducerController {
         return pendingProducerService.getByContact(contact);
     }
 
+    @GetMapping("/getLastId")
+    private Long getLatest(){
+        return pendingProducerService.getLatestId();
+    }
+
     @DeleteMapping("/deletePendingProduct/{id}")
     private String deletePending1(@PathVariable Long id){
         return pendingProducerService.deleteUrl(id);
