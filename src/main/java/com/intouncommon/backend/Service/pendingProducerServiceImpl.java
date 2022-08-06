@@ -47,14 +47,25 @@ public class pendingProducerServiceImpl implements pendingProducerService{
                 }
                 else {
                     List<pendingProducts> pendingProducts = pendingProducer.getPendingProducts();
-                    System.out.println(pendingProducers1);
-//                    List<pendingProducts> pendingProductsExists = pendingProducers1.get().getPendingProducts();
+                    //System.out.println(pendingProducers1);
+                    List<pendingProducts> pendingProductsExists = pendingProducers1.get().getPendingProducts();
 //                    pendingProductsExists.addAll(pendingProducts);
 //                    pendingProducers1.get().setPendingProducts(pendingProductsExists);
 //                    pendingProducerRepository.save(pendingProducers1.get());
                     for (com.intouncommon.backend.Entity.pendingProducts pendingProducts1 : pendingProducts){
-                        pendingProducts1.setPendingProducers(pendingProducers1.get());
-                        pendingProductRepository.save(pendingProducts1);
+                        boolean logicExisting = false;
+                        for (com.intouncommon.backend.Entity.pendingProducts pendingProducts2 : pendingProductsExists){
+                            if (pendingProducts1.getUrl().equals(pendingProducts2.getUrl())){
+                                logicExisting=true;
+                                break;
+                            }
+                        }
+                        if (!logicExisting){
+
+                            pendingProducts1.setPendingProducers(pendingProducers1.get());
+                            pendingProductRepository.save(pendingProducts1);
+                        }
+
                     }
                 }
                 return "added";
