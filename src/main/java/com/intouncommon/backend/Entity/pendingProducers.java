@@ -16,6 +16,7 @@ public class pendingProducers {
     private String contact;
     private String email;
     private String address;
+    private String whatsapp;
 
     @OneToMany(mappedBy = "pendingProducers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference("producer-image")
@@ -32,7 +33,14 @@ public class pendingProducers {
     public void setAddress(String address) {
         this.address = address;
     }
+    
+ public String getWhatsapp() {
+        return whatsapp;
+    }
 
+    public void setWhatsapp(String whatsapp) {
+        this.whatsapp = whatsapp;
+    }
     public Long getId() {
         return id;
     }

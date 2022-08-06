@@ -40,7 +40,7 @@ public class pendingProducerServiceImpl implements pendingProducerService{
                 }
                 Optional<pendingProducers> pendingProducers1 = pendingProducerRepository.findByContact(pendingProducer.getContact());
                 if (!pendingProducers1.isPresent()){
-                    if (pendingProducer.getName()==null||pendingProducer.getAddress()==null){
+                    if (pendingProducer.getName()==""||pendingProducer.getAddress()==""){
                         return "empty fields";
                     }
                     pendingProducerRepository.save(pendingProducer);
