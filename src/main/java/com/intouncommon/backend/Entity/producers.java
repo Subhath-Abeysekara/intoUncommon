@@ -17,6 +17,7 @@ public class producers {
     private String contact="0779421354";
     private String whatsApp = "";
     private String nicNo;
+    private String email;
 
     @OneToMany(mappedBy = "producers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference("producer-producerCategory")
@@ -47,6 +48,14 @@ public class producers {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+    
+     public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getWhatsApp() {
