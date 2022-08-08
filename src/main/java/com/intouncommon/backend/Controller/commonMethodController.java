@@ -199,8 +199,12 @@ public class commonMethodController {
 
     @GetMapping("/getproducers")
     private List<producers> getAllProducers(@RequestHeader String header) throws Exception{
+        if(adminService.checkTokenValidity(header)){
+            return commonMethodService.getAllProducers();
+        }
+        return null;
 
-        return commonMethodService.getAllProducers();
+        
 
 
     }
