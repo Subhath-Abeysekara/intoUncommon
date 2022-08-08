@@ -19,6 +19,7 @@ public class requestedProducers {
     private String nicNo;
     private String nicUrl1;
     private String nicUrl2;
+    private String email;
 
 
 
@@ -40,6 +41,15 @@ public class requestedProducers {
 
     public void setNicUrl2(String nicUrl2) {
         this.nicUrl2 = nicUrl2;
+    }
+    
+    
+     public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String Email) {
+        this.email = email;
     }
 
     public String getContact() {
