@@ -17,7 +17,8 @@ public class requestedProducers {
     private String contact="0779421354";
     private String whatsApp = "";
     private String nicNo;
-    private String nicUrl;
+    private String nicUrl1;
+    private String nicUrl2;
 
 
 
@@ -25,12 +26,20 @@ public class requestedProducers {
     }
 
 
-    public String getNicUrl() {
-        return nicUrl;
+    public String getNicUrl1() {
+        return nicUrl1;
     }
 
-    public void setNicUrl(String nicUrl) {
-        this.nicUrl = nicUrl;
+    public void setNicUrl1(String nicUrl1) {
+        this.nicUrl1 = nicUrl1;
+    }
+    
+     public String getNicUrl2() {
+        return nicUrl2;
+    }
+
+    public void setNicUrl2(String nicUrl2) {
+        this.nicUrl2 = nicUrl2;
     }
 
     public String getContact() {
