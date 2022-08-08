@@ -247,7 +247,7 @@ public class commonMethodController {
     @GetMapping("/getstates")
     private List<statecodes> getAllStates(@RequestHeader String header) throws Exception{
 
-        if(header.equals("hello"){
+        if(header.equalsIgnoreCase("hello")){
             return commonMethodService.getAllStates();
         }
         return null;
