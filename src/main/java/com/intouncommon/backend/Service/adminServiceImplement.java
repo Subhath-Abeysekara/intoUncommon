@@ -112,7 +112,7 @@ public class adminServiceImplement implements adminService {
         hourInt+=5;
         //hour = hourInt;
         System.out.println(hourInt);
-        hour = Integer.toString(hourInt);
+        //hour = Integer.toString(hourInt);
         System.out.println(hour);
         return makeFullString(username,password,hour);
     }
