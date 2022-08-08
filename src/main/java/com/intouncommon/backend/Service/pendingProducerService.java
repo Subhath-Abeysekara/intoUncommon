@@ -10,4 +10,5 @@ public interface pendingProducerService {
     String deleteUrl(Long id);
     String deleteProducer(Long id);
     Long getLatestId();
+    String confirmPendingProducer(String contact);
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class producers {
+public class requestedProducers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,28 +17,20 @@ public class producers {
     private String contact="0779421354";
     private String whatsApp = "";
     private String nicNo;
-
-    @OneToMany(mappedBy = "producers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference("producer-producerCategory")
-    @ToString.Exclude
-    private List<producerCategories> producerCategories;
-
-    @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference("producer-product")
-    @ToString.Exclude
-    private List<productions> productions;
+    private String nicUrl;
 
 
 
-    public producers() {
+    public requestedProducers() {
     }
 
-    public List<com.intouncommon.backend.Entity.productions> getProductions() {
-        return productions;
+
+    public String getNicUrl() {
+        return nicUrl;
     }
 
-    public void setProductions(List<com.intouncommon.backend.Entity.productions> productions) {
-        this.productions = productions;
+    public void setNicUrl(String nicUrl) {
+        this.nicUrl = nicUrl;
     }
 
     public String getContact() {
@@ -64,13 +56,7 @@ public class producers {
     public void setProducerId(Long producerId) {
         this.producerId = producerId;
     }
-    public List<com.intouncommon.backend.Entity.producerCategories> getProducerCategories() {
-        return producerCategories;
-    }
 
-    public void setProducerCategories(List<com.intouncommon.backend.Entity.producerCategories> producerCategories) {
-        this.producerCategories = producerCategories;
-    }
 
     public String getName() {
         return name;

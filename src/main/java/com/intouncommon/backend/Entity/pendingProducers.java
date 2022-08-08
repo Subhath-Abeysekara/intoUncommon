@@ -17,6 +17,7 @@ public class pendingProducers {
     private String email;
     private String address;
     private String whatsapp;
+    private String adminStatus="pending";
 
     @OneToMany(mappedBy = "pendingProducers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference("producer-image")
@@ -24,6 +25,14 @@ public class pendingProducers {
     private List<pendingProducts> pendingProducts;
 
     public pendingProducers() {
+    }
+
+    public String getAdminStatus() {
+        return adminStatus;
+    }
+
+    public void setAdminStatus(String adminStatus) {
+        this.adminStatus = adminStatus;
     }
 
     public String getAddress() {

@@ -121,4 +121,15 @@ public class pendingProducerServiceImpl implements pendingProducerService{
         }
         return latest+1;
     }
+
+    @Override
+    public String confirmPendingProducer(String contact) {
+        Optional<pendingProducers> pendingProducer = pendingProducerRepository.findByContact(contact);
+        if (pendingProducer.isPresent()){
+            pendingProducer.get().setAdminStatus("qualified");
+            pendingProducerRepository.save(pendingProducer.get());
+            return "saved";
+        }
+        return "error id";
+    }
 }

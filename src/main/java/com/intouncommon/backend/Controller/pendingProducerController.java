@@ -43,4 +43,10 @@ public class pendingProducerController {
     private String deletePending2(@PathVariable Long id){
         return pendingProducerService.deleteProducer(id);
     }
+
+    @PutMapping("/confirmPending/{contact}")
+    private String confirmPending(@PathVariable String contact){
+        return pendingProducerService.confirmPendingProducer(contact);
+    }
+
 }
