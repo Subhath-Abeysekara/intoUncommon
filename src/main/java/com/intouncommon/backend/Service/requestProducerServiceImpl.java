@@ -21,6 +21,7 @@ public class requestProducerServiceImpl implements requestProducerService{
     @Autowired
     private requestProducerRepository requestProducerRepository;
 
+    @Autowired
     private commonMethodService commonMethodService;
     
     

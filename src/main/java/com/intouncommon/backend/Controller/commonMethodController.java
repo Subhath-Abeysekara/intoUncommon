@@ -6,6 +6,7 @@ import com.intouncommon.backend.Service.commonMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -200,6 +201,7 @@ public class commonMethodController {
     @GetMapping("/getproducers")
     private List<producers> getAllProducers(@RequestHeader String header) throws Exception{
         if(adminService.checkTokenValidity(header)){
+
             return commonMethodService.getAllProducers();
         }
         return null;
@@ -211,7 +213,9 @@ public class commonMethodController {
 
     @PostMapping("/producer/add")
     private String addProducer(@RequestBody producers producer,@RequestHeader String header) throws Exception{
-
+        List<producers> producers = new ArrayList<>();
+        System.out.println(header);
+        System.out.println(adminService.checkTokenValidity(header));
         if(adminService.checkTokenValidity(header)){
             commonMethodService.addProducer(producer);
             return "Successfully Added";

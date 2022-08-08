@@ -82,6 +82,7 @@ public class adminServiceImplement implements adminService {
 
     private boolean checkPassword(String password, String passwordSend){
         if (password.equals(passwordSend)){
+            System.out.println(password + " & "+passwordSend);
             return true;
         }
         return false;
@@ -91,6 +92,7 @@ public class adminServiceImplement implements adminService {
         String hour = makeHourCount();
         int nowTime = Integer.parseInt(hour);
         int oldTime = Integer.parseInt(hourCount);
+        System.out.println(nowTime +" & " +oldTime);
         if (oldTime>nowTime){
             return true;
         }
@@ -108,7 +110,10 @@ public class adminServiceImplement implements adminService {
         String hour = makeHourCount();
         int hourInt = Integer.parseInt(hour);
         hourInt+=5;
-        hour = hourInt.toString();
+        //hour = hourInt;
+        System.out.println(hourInt);
+        hour = Integer.toString(hourInt);
+        System.out.println(hour);
         return makeFullString(username,password,hour);
     }
 
