@@ -48,6 +48,7 @@ public class requestProducerServiceImpl implements requestProducerService{
             producer.setContact(requestedProducer.get().getContact());
             producer.setNicNo(requestedProducer.get().getNicNo());
             producer.setWhatsApp(requestedProducer.get().getWhatsApp());
+            producer.setEmail(requestedProducer.get().getEmail());
             commonMethodService.addProducer(producer);
             requestProducerRepository.deleteByProducersId(id);
             return "confirmed";

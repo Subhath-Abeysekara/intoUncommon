@@ -109,7 +109,7 @@ public class adminServiceImplement implements adminService {
         }
         String hour = makeHourCount();
         int hourInt = Integer.parseInt(hour);
-        hourInt+=5;
+        hourInt+=10;
         //hour = hourInt;
         System.out.println(hourInt);
         hour = Integer.toString(hourInt);
