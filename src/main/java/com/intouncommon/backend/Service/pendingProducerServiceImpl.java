@@ -83,7 +83,11 @@ public class pendingProducerServiceImpl implements pendingProducerService{
     @Override
     public pendingProducers getByContact(String contact) {
         Optional<pendingProducers> pendingProducer = pendingProducerRepository.findByContact(contact);
-        return pendingProducer.orElse(null);
+        if (pendingProducer.isPresent()&&pendingProducer.get().getAdminStatus().equalsIgnoreCase("pending")){
+            return pendingProducer.get();
+        }
+
+        return null;
     }
 
     @Override

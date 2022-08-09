@@ -35,6 +35,12 @@ public class requstedProducerController {
         return requestProducerService.getRequests();
     }
 
+    @GetMapping("/getRequestLastId")
+    private Long getRequestId(){
+        return requestProducerService.getLatestId();
+    }
+
+
     @DeleteMapping("/rejectRequest/{id}")
     private String rejectRequest(@PathVariable Long id){
         return requestProducerService.rejectRequest(id);

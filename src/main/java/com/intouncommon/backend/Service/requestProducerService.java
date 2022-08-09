@@ -11,4 +11,5 @@ public interface requestProducerService {
     String confirmRequest(producers producer,Long id);
     List<requestedProducers> getRequests();
     String rejectRequest(Long id);
+    Long getLatestId();
 }

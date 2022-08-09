@@ -69,4 +69,16 @@ public class requestProducerServiceImpl implements requestProducerService{
         }
         return "error id";
     }
+
+    @Override
+    public Long getLatestId() {
+        List<requestedProducers> requestedProducers = requestProducerRepository.findAll();
+        Long latest = 0L;
+        for (com.intouncommon.backend.Entity.requestedProducers requestedProducers1 : requestedProducers){
+            if (requestedProducers1.getProducerId()>latest){
+                latest=requestedProducers1.getProducerId();
+            }
+        }
+        return latest+1;
+    }
 }
