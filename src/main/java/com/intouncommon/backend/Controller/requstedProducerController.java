@@ -25,6 +25,11 @@ public class requstedProducerController {
         return requestProducerService.requestAdd(requestedProducers);
     }
 
+    @PostMapping("/addSlip")
+    private String addSlip(@RequestBody slip slip){
+        return requestProducerService.addSlip(slip);
+    }
+
     @PostMapping("/confirmRequest/{id}")
     private String getPending(@RequestBody producers producer,@PathVariable Long id){
         return requestProducerService.confirmRequest(producer,id);

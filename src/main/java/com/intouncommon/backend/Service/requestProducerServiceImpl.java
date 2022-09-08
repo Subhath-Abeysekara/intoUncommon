@@ -23,6 +23,9 @@ public class requestProducerServiceImpl implements requestProducerService{
 
     @Autowired
     private commonMethodService commonMethodService;
+
+    @Autowired
+    private slipRepository slipRepository;
     
     
     @Override
@@ -37,6 +40,13 @@ public class requestProducerServiceImpl implements requestProducerService{
             }
         }
         return "not qualified";
+    }
+
+    @Override
+    public String addSlip(slip slip) {
+
+        slipRepository.save(slip);
+        return "added";
     }
 
     @Override

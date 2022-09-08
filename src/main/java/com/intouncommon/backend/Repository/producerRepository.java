@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public interface producerRepository extends JpaRepository<producers, Long> {
 
@@ -14,4 +16,5 @@ public interface producerRepository extends JpaRepository<producers, Long> {
     @Transactional
     @Query(value = "DELETE FROM producers v WHERE v.producerId = :id")
     void deleteByProducersId(Long id);
+    Optional<producers> findByContact(String contact);
 }

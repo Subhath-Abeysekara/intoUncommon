@@ -3,6 +3,7 @@ package com.intouncommon.backend.Service;
 
 import com.intouncommon.backend.Entity.pendingProducers;
 import com.intouncommon.backend.Entity.pendingProducts;
+import com.intouncommon.backend.Entity.producers;
 import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ public class pendingProducerServiceImpl implements pendingProducerService{
 
     @Autowired
     private pendingProductRepository pendingProductRepository;
+
+    @Autowired
+    private producerRepository producerRepository;
 
     @Override
     public String addPendingProducer(pendingProducers pendingProducer) {
@@ -39,7 +43,8 @@ public class pendingProducerServiceImpl implements pendingProducerService{
                     }
                 }
                 Optional<pendingProducers> pendingProducers1 = pendingProducerRepository.findByContact(pendingProducer.getContact());
-                if (!pendingProducers1.isPresent()){
+                Optional<producers> producer = producerRepository.findByContact(pendingProducer.getContact());
+                if (!pendingProducers1.isPresent()&&!producer.isPresent()){
                     if (pendingProducer.getName()==""||pendingProducer.getAddress()==""){
                         return "empty fields";
                     }
