@@ -31,7 +31,7 @@ public class requstedProducerController {
     }
 
     @PostMapping("/confirmRequest/{id}")
-    private String getPending(@RequestBody producers producer,@PathVariable Long id){
+    private String getPending(@RequestBody confirmReqBody producer , @PathVariable Long id){
         return requestProducerService.confirmRequest(producer,id);
     }
 

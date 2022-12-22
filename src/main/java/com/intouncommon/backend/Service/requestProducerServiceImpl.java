@@ -4,11 +4,13 @@ package com.intouncommon.backend.Service;
 import com.intouncommon.backend.Entity.pendingProducers;
 import com.intouncommon.backend.Entity.producers;
 import com.intouncommon.backend.Entity.requestedProducers;
+import com.intouncommon.backend.Repository.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.intouncommon.backend.Repository.*;
 import com.intouncommon.backend.Entity.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,13 @@ public class requestProducerServiceImpl implements requestProducerService{
     private commonMethodService commonMethodService;
 
     @Autowired
-    private slipRepository slipRepository;
+    private producerRepository producerRepository;
+
+    @Autowired
+    private producerCategoriesRepository producerCategoriesRepository;
+
+    @Autowired
+    private pendingProductRepository pendingProductRepository;
     
     
     @Override
@@ -35,6 +43,11 @@ public class requestProducerServiceImpl implements requestProducerService{
             if (pendingProducers1.getContact().equals(requestedProducer.getContact())){
                 if (pendingProducers1.getAdminStatus().equalsIgnoreCase("qualified")){
                     requestProducerRepository.save(requestedProducer);
+                    List<pendingProducts> pendingProducts = pendingProducers1.getPendingProducts();
+                    for (com.intouncommon.backend.Entity.pendingProducts pendingProducts1 : pendingProducts){
+                        pendingProductRepository.deleteByProductId(pendingProducts1.getId());
+                    }
+                    pendingProducerRepository.deleteByProducersId(pendingProducers1.getId());
                     return "added";
                 }
             }
@@ -44,14 +57,23 @@ public class requestProducerServiceImpl implements requestProducerService{
 
     @Override
     public String addSlip(slip slip) {
+        Optional<requestedProducers> producer = requestProducerRepository.findByContact(slip.getContact());
+        if (producer.isPresent()){
+            producer.get().setSlipUrl(slip.getUrl());
+            requestProducerRepository.save(producer.get());
+            return "added";
+        }
 
-        slipRepository.save(slip);
-        return "added";
+        return "error contact";
+
     }
 
     @Override
-    public String confirmRequest(producers producer,Long id) {
+    public String confirmRequest(confirmReqBody confirmReqBody,Long id) {
+        System.out.println(id);
         Optional<requestedProducers> requestedProducer = requestProducerRepository.findById(id);
+        producers producer = new producers();
+        List<producerCategories> producerCategories = new ArrayList<>();
         if (requestedProducer.isPresent()){
             producer.setName(requestedProducer.get().getName());
             producer.setBasicDetails(requestedProducer.get().getBasicDetails());
@@ -59,8 +81,17 @@ public class requestProducerServiceImpl implements requestProducerService{
             producer.setNicNo(requestedProducer.get().getNicNo());
             producer.setWhatsApp(requestedProducer.get().getWhatsApp());
             producer.setEmail(requestedProducer.get().getEmail());
-            commonMethodService.addProducer(producer);
+            Long producerId = commonMethodService.addProducer(producer).getProducerId();
             requestProducerRepository.deleteByProducersId(id);
+            producers existingProducer = producerRepository.findById(producerId).orElseThrow(() ->
+                    new ResourceNotFoundException("Location", "Id", producerId));
+            for (Long catId : confirmReqBody.getCatIds()){
+                producerCategories producerCategory = new producerCategories();
+                producerCategory.setCatId(catId);
+                producerCategory.setProducers(existingProducer);
+                producerCategoriesRepository.save(producerCategory);
+
+            }
             return "confirmed";
         }
         return "error id";

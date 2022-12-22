@@ -21,6 +21,8 @@ public class requestedProducers {
     private String nicUrl2;
     private String email;
 
+    private String slipUrl;
+
 
 
     public requestedProducers() {
@@ -91,6 +93,14 @@ public class requestedProducers {
 
     public void setBasicDetails(String basicDetails) {
         this.basicDetails = basicDetails;
+    }
+
+    public String getSlipUrl() {
+        return slipUrl;
+    }
+
+    public void setSlipUrl(String slipUrl) {
+        this.slipUrl = slipUrl;
     }
 
   /*  public String getContact() {

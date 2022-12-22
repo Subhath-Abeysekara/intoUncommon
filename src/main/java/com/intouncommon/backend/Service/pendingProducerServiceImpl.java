@@ -51,6 +51,9 @@ public class pendingProducerServiceImpl implements pendingProducerService{
                     pendingProducerRepository.save(pendingProducer);
                 }
                 else {
+                    if (producer.isPresent()){
+                        return "cant add here";
+                    }
                     List<pendingProducts> pendingProducts = pendingProducer.getPendingProducts();
                     //System.out.println(pendingProducers1);
                     List<pendingProducts> pendingProductsExists = pendingProducers1.get().getPendingProducts();
