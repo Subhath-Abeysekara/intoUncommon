@@ -122,8 +122,7 @@ public class commonMethodServiceImpl implements commonMethodService{
         return producerRepository.findAll();
     }
 
-    @Override
-    public Long addProduction(productionDto production) {
+    private Long addProductPrimary(productionDto production) {
 
         productions productions = production.getProductions();
 
@@ -135,6 +134,20 @@ public class commonMethodServiceImpl implements commonMethodService{
                 new ResourceNotFoundException("Location", "Id", productions.getId()));
         productions.setProducer(existingProducer);
         return productionRepository.save(productions).getId();
+    }
+    @Override
+    public Long addProduction(productionDto production) {
+        return addProductPrimary(production);
+    }
+
+    @Override
+    public String confirmProduction(productUncomAddObject productUncomAddObject) {
+
+        Long id = addProductPrimary(productUncomAddObject.getProductionDto());
+        addImageUrlPrimay(productUncomAddObject.getUrl1() , id);
+        addImageUrlPrimay(productUncomAddObject.getUrl2() , id);
+
+        return "success";
     }
 
     @Override
@@ -412,14 +425,17 @@ public class commonMethodServiceImpl implements commonMethodService{
         return userRepository.findAll();
     }
 
-    @Override
-    public productImages addImageUrl(productImageDTO productImageDTO) {
-        productImages productImages = productImageDTO.getProductImages();
+    private productImages addImageUrlPrimay(String url , Long id) {
+        productImages productImages = new productImages();
+        productImages.setUrl(url);
 
-
-        productions existingProduction = productionRepository.findById(productImageDTO.getProductId()).orElseThrow(() ->
-                new ResourceNotFoundException("Location", "Id", productImageDTO.getProductId()));
+        productions existingProduction = productionRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Location", "Id", id));
         productImages.setProductions(existingProduction);
         return productionImageRepository.save(productImages);
+    }
+    @Override
+    public productImages addImageUrl(productImageDTO productImageDTO) {
+        return addImageUrlPrimay(productImageDTO.getProductImages().getUrl() , productImageDTO.getProductId());
     }
 }

@@ -155,6 +155,18 @@ public class commonMethodController {
 
 
     }
+
+    @PostMapping("/product/confirm")
+    private String confirmProduct(@RequestBody productUncomAddObject productUncomAddObject,@RequestHeader String header) throws Exception{
+
+        if(adminService.checkTokenValidity(header)){
+            commonMethodService.confirmProduction(productUncomAddObject);
+            return "added";
+        }
+        return "Wrong token";
+
+
+    }
     /** Category **/
 
     @GetMapping("/getcategories")
