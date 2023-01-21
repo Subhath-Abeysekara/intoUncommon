@@ -26,8 +26,26 @@ public class productions {
     private int amount=0;
     private String addDate;
 
+    private Long cat = 0L;
+    private String cat_type="";
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    private String cat_material = "";
+
+    private String producer_name = "";
+
+    private String producer_basicDetails = "";
+
+    private String repayColor = "";
+
+    private String changeColor = "";
+
+    private String warrantyColor="";
+
+    private String discountColor = "";
+
+
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "producer", foreignKey = @ForeignKey(name = "product_producer_fk1"))
     @JsonBackReference(value = "producer-product")
     @ToString.Exclude
@@ -35,7 +53,7 @@ public class productions {
 
 
 
-   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "category", foreignKey = @ForeignKey(name = "product_category_fk1"))
     @JsonBackReference(value = "category-product")
     @ToString.Exclude
@@ -175,5 +193,77 @@ public class productions {
 
     public void setProductImages(List<com.intouncommon.backend.Entity.productImages> productImages) {
         this.productImages = productImages;
+    }
+
+    public String getCat_type() {
+        return cat_type;
+    }
+
+    public void setCat_type(String cat_type) {
+        this.cat_type = cat_type;
+    }
+
+    public String getCat_material() {
+        return cat_material;
+    }
+
+    public void setCat_material(String cat_material) {
+        this.cat_material = cat_material;
+    }
+
+    public String getProducer_name() {
+        return producer_name;
+    }
+
+    public void setProducer_name(String producer_name) {
+        this.producer_name = producer_name;
+    }
+
+    public String getRepayColor() {
+        return repayColor;
+    }
+
+    public void setRepayColor(String repayColor) {
+        this.repayColor = repayColor;
+    }
+
+    public String getChangeColor() {
+        return changeColor;
+    }
+
+    public void setChangeColor(String changeColor) {
+        this.changeColor = changeColor;
+    }
+
+    public String getWarrantyColor() {
+        return warrantyColor;
+    }
+
+    public void setWarrantyColor(String warrantyColor) {
+        this.warrantyColor = warrantyColor;
+    }
+
+    public String getDiscountColor() {
+        return discountColor;
+    }
+
+    public void setDiscountColor(String discountColor) {
+        this.discountColor = discountColor;
+    }
+
+    public String getProducer_basicDetails() {
+        return producer_basicDetails;
+    }
+
+    public void setProducer_basicDetails(String producer_basicDetails) {
+        this.producer_basicDetails = producer_basicDetails;
+    }
+
+    public Long getCat() {
+        return cat;
+    }
+
+    public void setCat(Long cat) {
+        this.cat = cat;
     }
 }

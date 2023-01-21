@@ -19,7 +19,7 @@ public class producers {
     private String nicNo;
     private String email;
 
-    @OneToMany(mappedBy = "producers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "producers", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference("producer-producerCategory")
     @ToString.Exclude
     private List<producerCategories> producerCategories;

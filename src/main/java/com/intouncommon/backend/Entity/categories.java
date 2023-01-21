@@ -15,7 +15,7 @@ public class categories {
     private boolean common;
     private String material;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference("category-product")
     @ToString.Exclude
     private List<productions> productsions;

@@ -3,7 +3,9 @@ package com.intouncommon.backend.Controller;
 
 import com.intouncommon.backend.Entity.*;
 import com.intouncommon.backend.Service.mainService;
+import com.intouncommon.backend.Service.specialService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +18,9 @@ public class mainController {
 
     @Autowired
     private mainService mainService;
+
+    @Autowired
+    private specialService specialService;
 
 
     @PostMapping("/checkCommon")
@@ -85,5 +90,35 @@ public class mainController {
     @GetMapping("/getAmount")
     private int getAmount(@RequestParam Long id){
         return mainService.getImageAmount(id);
+    }
+
+    @GetMapping("/getSpecial")
+    private List<productions> getSpecial(){
+        return specialService.getSpecial();
+    }
+
+    @GetMapping("/fillSpecial")
+    private List<productions> fillSpecial(){
+        return specialService.fillSpecial();
+    }
+
+    @GetMapping("/getAll/products")
+    private List<productions> getAll(){
+        return specialService.getAll();
+    }
+
+    @GetMapping("/getAll/productBycat/{id}")
+    private List<productions> getAllByCat(@PathVariable Long id){
+        return specialService.getAllByCat(id);
+    }
+
+    @GetMapping("/getAll/pagination/{limit}/{offset}")
+    private Page<productions> getAllPagination(@PathVariable int limit , @PathVariable int offset){
+        return specialService.getPagination(limit , offset);
+    }
+
+    @GetMapping("/getAll/paginationCat/{id}/{limit}/{offset}")
+    private List<productions> getAllPaginationCat(@PathVariable Long id,@PathVariable int limit , @PathVariable int offset){
+        return specialService.getPaginationByCat(id,limit , offset);
     }
 }
